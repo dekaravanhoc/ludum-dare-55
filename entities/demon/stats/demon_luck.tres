@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Stat" load_steps=2 format=3 uid="uid://c00k3xdkx2gxe"]
+
+[ext_resource type="Script" path="res://entities/stats/stat.gd" id="1_uos3o"]
+
+[resource]
+script = ExtResource("1_uos3o")
+stat_name = "Luck"
+base_value = 1.0

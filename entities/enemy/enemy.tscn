@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c30ghnii7suyf"]
+
+[ext_resource type="Script" path="res://entities/enemy/enemy.gd" id="1_hbrhv"]
+[ext_resource type="BoxMesh" uid="uid://b0416x0miqgc7" path="res://entities/enemy/meshes/soldier.tres" id="2_qnw3j"]
+
+[node name="Enemy" type="Node3D"]
+script = ExtResource("1_hbrhv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = ExtResource("2_qnw3j")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(0.909093, 0.254275, -0.329991, 0.0597849, 0.704289, 0.707391, 0.412281, -0.662813, 0.625063, -9.13533, 19.3417, 16.5341)
+light_energy = 15.0
+shadow_enabled = true
+spot_range = 200.0
+spot_angle = 10.0

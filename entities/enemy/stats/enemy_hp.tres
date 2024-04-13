@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RangeStat" load_steps=2 format=3 uid="uid://bmdxvarr8e2tm"]
+
+[ext_resource type="Script" path="res://entities/stats/range_stat.gd" id="1_vw5kw"]
+
+[resource]
+script = ExtResource("1_vw5kw")
+min_value = 0.0
+stat_name = "Health"
+base_value = 100.0

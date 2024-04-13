@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://deomwref7oitj"]
+
+[ext_resource type="Script" path="res://entities/demon/demon.gd" id="1_rd8x2"]
+[ext_resource type="PackedScene" uid="uid://dpjby4cck8tw3" path="res://entities/demon/meshes/imp.tscn" id="2_f1e58"]
+
+[node name="Demon" type="Node3D"]
+script = ExtResource("1_rd8x2")
+
+[node name="Imp" parent="." instance=ExtResource("2_f1e58")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(0.978198, 1.51613e-10, 0.207673, -0.204518, -0.173648, 0.963337, 0.036062, -0.984808, -0.169862, 2, 10.59, -2)
+light_energy = 3.0
+shadow_enabled = true
+spot_range = 100.0
+spot_angle = 20.0

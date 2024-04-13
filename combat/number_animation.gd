@@ -10,7 +10,7 @@ class Number:
 	var color: Color
 
 
-@export font: FontFile
+@export var font: FontFile
 
 var current_numbers: Array[Number]
 
@@ -25,7 +25,7 @@ func add_damage(spawn_position: Vector2, damage: float, color: Color = Color.RED
 		spawn_position,
 		prefix_text + str(round(damage)),
 		int(lerpf(32.0, 96.0, damage_weight)),
-		Color.YELLOW,
+		color,
 		lerpf(1.0, 2.0, damage_weight)
 	)
 

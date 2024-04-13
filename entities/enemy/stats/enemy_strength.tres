@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Stat" load_steps=2 format=3 uid="uid://b5r0ooevvh2pj"]
+
+[ext_resource type="Script" path="res://entities/stats/stat.gd" id="1_ybel0"]
+
+[resource]
+script = ExtResource("1_ybel0")
+stat_name = "Strength"
+base_value = 1.0

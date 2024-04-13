@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Stat" load_steps=2 format=3 uid="uid://dovpa0kiul7oy"]
+
+[ext_resource type="Script" path="res://entities/stats/stat.gd" id="1_2ywbb"]
+
+[resource]
+script = ExtResource("1_2ywbb")
+stat_name = "Blood Earned"
+base_value = 0.0
