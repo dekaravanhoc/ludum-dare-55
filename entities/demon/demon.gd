@@ -16,16 +16,17 @@ extends Node3D
 signal demon_defeated
 
 var cooldown: float = 0
-var currentState: DemonState
+var currentState: DemonState = DemonState.DEMONREALM
 
 enum DemonState { FIGHT, LOSS, WIN, DEMONREALM }
 
 
-func _ready() -> void:
-	currentState = DemonState.DEMONREALM
-	cooldown = Combat.getCooldown(agility.value)
+func start_combat() -> void:
+	currentState = DemonState.FIGHT
+	cooldown = Combat.getCooldown(roundi(agility.value))
 	health.value = health.max_value
-	enemy.enemy_defeated.connect(func() -> void: currentState = DemonState.WIN)
+	if enemy:
+		enemy.enemy_defeated.connect(func() -> void: currentState = DemonState.WIN)
 
 
 func _process(_delta: float) -> void:
@@ -41,7 +42,7 @@ func _process(_delta: float) -> void:
 
 
 func hit(_damage: int) -> int:
-	var dealed_damage: int = Combat.getHitDamage(_damage, defense.value)
+	var dealed_damage: int = Combat.getHitDamage(_damage, roundi(defense.value))
 	health.value -= dealed_damage
 	if health.value <= 0:
 		currentState = DemonState.LOSS
@@ -53,7 +54,7 @@ func _fight(_delta: float) -> void:
 	cooldown -= _delta
 	if cooldown < 0:
 		_attack()
-		cooldown = Combat.getCooldown(agility.value)
+		cooldown = Combat.getCooldown(roundi(agility.value))
 
 
 func _attack() -> void:
@@ -61,7 +62,7 @@ func _attack() -> void:
 		enemy.position
 	)
 	var isCrit: bool = Combat.getCrit(luck.value)
-	var damage: int = Combat.getDamage(strength.value, isCrit)
+	var damage: int = Combat.getDamage(roundi(strength.value), isCrit)
 	var damage_text: String = "Crit" if isCrit else ""
 	# add skill damage and set skill name/color
 	var dealed_damage: int = enemy.hit(damage)

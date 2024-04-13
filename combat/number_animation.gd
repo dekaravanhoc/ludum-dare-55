@@ -23,7 +23,7 @@ func add_damage(spawn_position: Vector2, damage: float, color: Color = Color.RED
 	var damage_weight: float = ease(minf(damage / 50000.0, 1.0), 1.3)
 	_add_number(
 		spawn_position,
-		prefix_text + str(round(damage)),
+		prefix_text + " " + str(round(damage)) if prefix_text else str(round(damage)),
 		int(lerpf(128.0, 128 * 5, damage_weight)),
 		color,
 		lerpf(1.0, 3.0, damage_weight),

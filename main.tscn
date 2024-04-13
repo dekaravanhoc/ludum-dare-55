@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://cct6pthb2ry00"]
 
-[ext_resource type="PackedScene" uid="uid://do073kns74cv7" path="res://demon_realm/demon_realm.tscn" id="1_hiwb7"]
+[ext_resource type="PackedScene" uid="uid://xm3d2betvwul" path="res://combat/combat.tscn" id="1_0pms1"]
 
 [node name="Main" type="Node3D"]
 
-[node name="DemonRealm" parent="." instance=ExtResource("1_hiwb7")]
+[node name="Combat" parent="." instance=ExtResource("1_0pms1")]
