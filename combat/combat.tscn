@@ -30,8 +30,10 @@ fog_density = 0.1
 
 [node name="Combat" type="Node3D"]
 
-[node name="Demon" parent="." instance=ExtResource("1_mif6o")]
+[node name="Demon" parent="." node_paths=PackedStringArray("enemy", "number_animation") instance=ExtResource("1_mif6o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+enemy = NodePath("../Enemy")
+number_animation = NodePath("../NumberAnimation")
 
 [node name="Enemy" parent="." instance=ExtResource("2_2ddhi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
