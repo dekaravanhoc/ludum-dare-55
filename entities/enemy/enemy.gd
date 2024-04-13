@@ -1,7 +1,6 @@
 class_name Enemy
 extends Node3D
 
-
 class EnemyType:
 	extends RefCounted
 

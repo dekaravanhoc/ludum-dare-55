@@ -16,15 +16,15 @@ extends Control
 
 
 func _ready() -> void:
-	demon_health_bar.max_value = demon_health.max_value
 	var update_demon_health_bar: Callable = func() -> void:
+		demon_health_bar.max_value = demon_health.max_value
 		demon_health_bar.value = demon_health.value
 		demon_health_label.text = "%s: %d" % [demon_label_prefix, int(demon_health.value)]
 	demon_health.value_changed.connect(update_demon_health_bar)
 	update_demon_health_bar.call()
 	
-	enemy_health_bar.max_value = enemy_health.max_value
 	var update_enemy_health_bar: Callable = func() -> void:
+		enemy_health_bar.max_value = enemy_health.max_value
 		enemy_health_bar.value = enemy_health.value
 		enemy_health_label.text = "%s: %d" % [enemy_label_prefix, int(enemy_health.value)]
 	enemy_health.value_changed.connect(update_enemy_health_bar)

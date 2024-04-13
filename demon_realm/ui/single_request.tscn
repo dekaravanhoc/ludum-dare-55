@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bl4c5qnrdnfe4"]
+
+[ext_resource type="Theme" uid="uid://8k8dbw68feyc" path="res://theme/main_theme.tres" id="1_r2qt0"]
+
+[node name="SingleRequest" type="PanelContainer"]
+custom_minimum_size = Vector2(512, 512)
+offset_right = 384.0
+offset_bottom = 384.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_r2qt0")

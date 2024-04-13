@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Stat" load_steps=2 format=3 uid="uid://3fmx31pf37p3"]
+
+[ext_resource type="Script" path="res://entities/stats/stat.gd" id="1_f7v4c"]
+
+[resource]
+script = ExtResource("1_f7v4c")
+stat_name = "Knowledge"
+base_value = 1.0
