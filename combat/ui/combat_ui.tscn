@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3vi8ywiuxrhe"]
+[gd_scene load_steps=6 format=3 uid="uid://c3vi8ywiuxrhe"]
 
 [ext_resource type="Theme" uid="uid://8k8dbw68feyc" path="res://theme/main_theme.tres" id="1_pgjxw"]
 [ext_resource type="Script" path="res://combat/ui/combat_ui.gd" id="1_tuwyw"]
+[ext_resource type="Resource" uid="uid://bmdxvarr8e2tm" path="res://entities/enemy/stats/enemy_hp.tres" id="3_mdnfl"]
+[ext_resource type="Resource" uid="uid://dpiegvcel248p" path="res://entities/demon/stats/demon_hp.tres" id="4_5h477"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k6x4p"]
 bg_color = Color(1, 1, 1, 0.254902)
@@ -11,7 +13,7 @@ border_width_right = 12
 border_width_bottom = 12
 border_color = Color(0.470076, 0.470076, 0.470075, 1)
 
-[node name="CombatUI" type="Control"]
+[node name="CombatUI" type="Control" node_paths=PackedStringArray("demon_health_bar", "demon_health_label", "enemy_health_bar", "enemy_health_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,6 +22,14 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_pgjxw")
 script = ExtResource("1_tuwyw")
+enemy_health = ExtResource("3_mdnfl")
+demon_health = ExtResource("4_5h477")
+demon_health_bar = NodePath("MarginContainer/VBoxContainer/DemonBars/DemonHealth")
+demon_health_label = NodePath("MarginContainer/VBoxContainer/DemonBars/DemonHealth/Label")
+demon_label_prefix = "Your Health"
+enemy_health_bar = NodePath("MarginContainer/VBoxContainer/EnemyHealth")
+enemy_health_label = NodePath("MarginContainer/VBoxContainer/EnemyHealth/Label")
+enemy_label_prefix = "Enemy Health"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
