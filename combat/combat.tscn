@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://xm3d2betvwul"]
+[gd_scene load_steps=10 format=3 uid="uid://xm3d2betvwul"]
 
-[ext_resource type="Script" path="res://combat/combat.gd" id="1_i8lt0"]
+[ext_resource type="Script" path="res://combat/combat.gd" id="1_56ajt"]
 [ext_resource type="PackedScene" uid="uid://deomwref7oitj" path="res://entities/demon/demon.tscn" id="1_mif6o"]
 [ext_resource type="PackedScene" uid="uid://c30ghnii7suyf" path="res://entities/enemy/enemy.tscn" id="2_2ddhi"]
 [ext_resource type="Script" path="res://combat/number_animation.gd" id="3_rtr1x"]
@@ -27,7 +27,10 @@ fog_light_color = Color(0.280402, 0.111929, 0.127562, 1)
 fog_light_energy = 0.5
 fog_density = 0.1
 
-[node name="Combat" type="Node3D"]
+[node name="Combat" type="Node3D" node_paths=PackedStringArray("enemy", "demon")]
+script = ExtResource("1_56ajt")
+enemy = NodePath("Enemy")
+demon = NodePath("Demon")
 
 [node name="Demon" parent="." node_paths=PackedStringArray("enemy", "number_animation") instance=ExtResource("1_mif6o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)

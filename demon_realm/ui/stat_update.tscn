@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://ct3typr82rc2f"]
+
+[ext_resource type="Theme" uid="uid://8k8dbw68feyc" path="res://theme/main_theme.tres" id="1_ewep5"]
+
+[node name="StatUpdate" type="HBoxContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_ewep5")
+
+[node name="StatName" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Health"
+
+[node name="CurrentLevel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "    100
+"
+
+[node name="AddLevel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "+10"
+
+[node name="Cost" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "  -100 K"
+
+[node name="AddButton" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_type_variation = &"SmallButton"
+theme_override_font_sizes/font_size = 128
+text = "+"
+
+[node name="SubstractButton" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_type_variation = &"SmallButton"
+theme_override_font_sizes/font_size = 128
+text = "-"

@@ -57,6 +57,8 @@ func _add_number(
 	tween.parallel()
 	tween.tween_property(number, "position", number.position + Vector2(30, -100) * move_range, time)
 	tween.parallel()
+	tween.tween_property(number, "font_size", number.font_size * 1.2, time/2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tween.parallel()
 	tween.tween_property(number, "color:a", 0.0, time/2).set_delay(time/2).from(1.0)
 	tween.tween_callback(func() -> void: current_numbers.erase(number))
 
@@ -69,15 +71,16 @@ func _process(_delta: float) -> void:
 
 func _draw() -> void:
 	for number: Number in current_numbers:
-		# draw_string(
-		# 	font,
-		# 	Vector2(number.position.x - (number.font_size * 0.05), number.position.y + (number.font_size * 0.05 / 2)),
-		# 	number.text,
-		# 	HORIZONTAL_ALIGNMENT_LEFT,
-		# 	-1,
-		# 	roundi(number.font_size * 1.05),
-		# 	Color.BLACK
-		# )
+		draw_string_outline(
+			font,
+			number.position,
+			number.text,
+			HORIZONTAL_ALIGNMENT_LEFT,
+			-1,
+			roundi(number.font_size),
+			ceili(number.font_size * 0.1),
+			Color(number.color.r * 0.2, number.color.g * 0.2, number.color.b * 0.2, number.color.a)
+		)
 		draw_string(
 			font,
 			number.position,

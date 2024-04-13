@@ -1,0 +1,88 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbmmq04x388mw"]
+
+[ext_resource type="Theme" uid="uid://8k8dbw68feyc" path="res://theme/main_theme.tres" id="1_jx7sf"]
+[ext_resource type="PackedScene" uid="uid://ct3typr82rc2f" path="res://demon_realm/ui/stat_update.tscn" id="2_1yamj"]
+[ext_resource type="Script" path="res://demon_realm/ui/level_up_ui.gd" id="2_fhpir"]
+
+[node name="LevelUPUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_jx7sf")
+script = ExtResource("2_fhpir")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 128
+
+[node name="Knowledge" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Name" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Knowledge"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Knowledge: "
+
+[node name="Number" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Knowledge"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "100000"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/separation = 32
+
+[node name="StatUpdate" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_1yamj")]
+layout_mode = 2
+
+[node name="StatUpdate2" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_1yamj")]
+layout_mode = 2
+
+[node name="StatName" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/StatUpdate2" index="0"]
+text = "Defense"
+
+[node name="CurrentLevel" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/StatUpdate2" index="1"]
+text = "35435
+"
+
+[node name="Cost" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/StatUpdate2" index="3"]
+text = "-1000 B"
+
+[node name="StatUpdate3" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_1yamj")]
+layout_mode = 2
+
+[node name="StatUpdate4" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_1yamj")]
+layout_mode = 2
+
+[node name="StatUpdate5" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_1yamj")]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Save Stat Update"
+
+[editable path="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/StatUpdate2"]

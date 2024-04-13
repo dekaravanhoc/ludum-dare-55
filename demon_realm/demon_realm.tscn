@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://do073kns74cv7"]
+
+[ext_resource type="PackedScene" uid="uid://deomwref7oitj" path="res://entities/demon/demon.tscn" id="1_n0dwk"]
+[ext_resource type="PackedScene" uid="uid://jecsf03ony31" path="res://demon_realm/ui/demon_realm_ui.tscn" id="2_uw3kr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_k4lll"]
+size = Vector3(10, 10, 10)
+
+[sub_resource type="Environment" id="Environment_tp243"]
+background_mode = 1
+background_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
+fog_enabled = true
+fog_light_color = Color(0.0784314, 0.0784314, 0.0784314, 1)
+fog_density = 0.5
+
+[node name="DemonRealm" type="Node3D"]
+
+[node name="Demon" parent="." instance=ExtResource("1_n0dwk")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, -2.5)
+mesh = SubResource("BoxMesh_k4lll")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.954963, 0.106593, -0.276918, 7.45058e-09, 0.933249, 0.359231, 0.296725, 0.343053, -0.891218, -2.11185, 3.10304, -4.9261)
+fov = 50.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tp243")
+
+[node name="DemonRealmUI" parent="." instance=ExtResource("2_uw3kr")]
