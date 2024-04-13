@@ -111,7 +111,7 @@ Objects:
         - Soldier
             Normal Def and High HP, Normal Damage
         - Archer
-            Low Def, Normal HP, Fast and Normal Damage
+            Low Def, Normal HP, Fast and Higher Damage
         - Peasant
             Normal on every Scale
         - Knight
