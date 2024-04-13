@@ -1,5 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://xm3d2betvwul"]
 
+[ext_resource type="Script" path="res://combat/combat.gd" id="1_i8lt0"]
 [ext_resource type="PackedScene" uid="uid://deomwref7oitj" path="res://entities/demon/demon.tscn" id="1_mif6o"]
 [ext_resource type="PackedScene" uid="uid://c30ghnii7suyf" path="res://entities/enemy/enemy.tscn" id="2_2ddhi"]
 [ext_resource type="Script" path="res://combat/number_animation.gd" id="3_rtr1x"]
@@ -22,8 +23,6 @@ ambient_light_source = 2
 ambient_light_color = Color(0.351563, 0.351563, 0.351563, 1)
 ambient_light_energy = 0.3
 tonemap_mode = 2
-ssao_enabled = true
-ssil_enabled = true
 fog_light_color = Color(0.280402, 0.111929, 0.127562, 1)
 fog_light_energy = 0.5
 fog_density = 0.1
@@ -45,8 +44,7 @@ layers = 3
 mesh = SubResource("PlaneMesh_c0ncx")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.815471, -0.387506, 0.429938, 0.114987, 0.836468, 0.535817, -0.567262, -0.387506, 0.726673, 6.35125, 7.23296, 10.4105)
-current = true
+transform = Transform3D(0.815471, -0.339952, 0.468444, 0.114987, 0.88836, 0.444517, -0.567262, -0.308625, 0.763521, 6.35125, 7.23296, 10.4105)
 fov = 50.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]

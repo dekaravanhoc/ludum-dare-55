@@ -20,13 +20,14 @@ func _ready() -> void:
 
 
 func add_damage(spawn_position: Vector2, damage: float, color: Color = Color.RED, prefix_text: String = "") -> void:
-	var damage_weight: float = ease(minf(damage / 100.0, 1.0), 3)
+	var damage_weight: float = ease(minf(damage / 50000.0, 1.0), 1.3)
 	_add_number(
 		spawn_position,
 		prefix_text + str(round(damage)),
-		int(lerpf(32.0, 96.0, damage_weight)),
+		int(lerpf(128.0, 128 * 5, damage_weight)),
 		color,
-		lerpf(1.0, 2.0, damage_weight)
+		lerpf(1.0, 3.0, damage_weight),
+		lerpf(3.0, 1.0, damage_weight)
 	)
 
 
@@ -36,6 +37,7 @@ func _add_number(
 	font_size: int,
 	color: Color,
 	time: float = 0.5,
+	move_range:float = 1,
 	offset: Vector2 = Vector2(10, -30)
 ) -> void:
 	var number: Number = Number.new()
@@ -45,6 +47,7 @@ func _add_number(
 	number.font_size = font_size
 	number.color = color
 	number.color.a = 0
+	number.position.x += -(number.font_size)  + randi_range(-100, 100)
 
 	current_numbers.append(number)
 
@@ -52,9 +55,9 @@ func _add_number(
 
 	tween.tween_property(number, "color:a", 1.0, 0.1)
 	tween.parallel()
-	tween.tween_property(number, "position", number.position + Vector2(30, -100), time)
+	tween.tween_property(number, "position", number.position + Vector2(30, -100) * move_range, time)
 	tween.parallel()
-	tween.tween_property(number, "color:a", 0.0, 0.25).set_delay(time - 0.25).from(1.0)
+	tween.tween_property(number, "color:a", 0.0, time/2).set_delay(time/2).from(1.0)
 	tween.tween_callback(func() -> void: current_numbers.erase(number))
 
 
@@ -66,6 +69,15 @@ func _process(_delta: float) -> void:
 
 func _draw() -> void:
 	for number: Number in current_numbers:
+		# draw_string(
+		# 	font,
+		# 	Vector2(number.position.x - (number.font_size * 0.05), number.position.y + (number.font_size * 0.05 / 2)),
+		# 	number.text,
+		# 	HORIZONTAL_ALIGNMENT_LEFT,
+		# 	-1,
+		# 	roundi(number.font_size * 1.05),
+		# 	Color.BLACK
+		# )
 		draw_string(
 			font,
 			number.position,

@@ -12,7 +12,7 @@ const base_crit_multiplier: float = 1.5
 static var rng:RandomNumberGenerator = RandomNumberGenerator.new()
 
 func _ready() -> void:
-	start_combat([Enemy.EnemyTypes.Soldier, Enemy.EnemyTypes.Archer], 100000)
+	start_combat([Enemy.EnemyTypes.Soldier, Enemy.EnemyTypes.Archer], 10000)
 
 func start_combat(enemy_types: Array[Enemy.EnemyType], experience: int) -> void:
 	enemy.build_enemy(enemy_types, experience)

@@ -16,8 +16,8 @@ defense = ExtResource("5_y1ap7")
 luck = ExtResource("6_4nny4")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(0.953478, 0.147351, -0.262996, -0.00467807, 0.87953, 0.47582, 0.301426, -0.452454, 0.839302, -9.13533, 19.3417, 16.5341)
+transform = Transform3D(0.953478, 0.165149, -0.252201, -0.00467807, 0.844598, 0.535381, 0.301426, -0.509294, 0.806078, -9.13533, 19.3417, 16.5341)
 light_energy = 15.0
 shadow_enabled = true
 spot_range = 75.0
-spot_angle = 20.0
+spot_angle = 25.0
