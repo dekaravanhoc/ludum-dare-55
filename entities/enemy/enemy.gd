@@ -79,6 +79,8 @@ const army_grid_size: Vector2 = Vector2(1.5, 1.5)
 @export var defense: Stat
 @export var luck: Stat
 
+signal enemy_defeated
+
 var enemy_types: Array[EnemyType]
 var current_state: State = State.PREPARE
 
@@ -90,8 +92,13 @@ func build_enemy(enemy_types_to_use: Array[EnemyType], experience: int) -> void:
 	_place_meshes(experience)
 
 
-func hit(damage: int) -> void:
-	pass
+func hit(damage: int) -> int:
+	var true_damage:int = Combat.getHitDamage(damage, defense.value)
+	health.value -= true_damage
+	if(health.value  <= 0):
+		current_state = State.LOSS
+		enemy_defeated.emit()
+	return true_damage
 
 
 func _place_meshes(experience: int) -> void:
