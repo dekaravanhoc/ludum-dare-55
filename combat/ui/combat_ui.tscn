@@ -13,7 +13,7 @@ border_width_right = 12
 border_width_bottom = 12
 border_color = Color(0.470076, 0.470076, 0.470075, 1)
 
-[node name="CombatUI" type="Control" node_paths=PackedStringArray("demon_health_bar", "demon_health_label", "enemy_health_bar", "enemy_health_label")]
+[node name="CombatUI" type="Control" node_paths=PackedStringArray("fps_label", "demon_health_bar", "demon_health_label", "enemy_health_bar", "enemy_health_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,6 +24,7 @@ theme = ExtResource("1_pgjxw")
 script = ExtResource("1_tuwyw")
 enemy_health = ExtResource("3_mdnfl")
 demon_health = ExtResource("4_5h477")
+fps_label = NodePath("MarginContainer/VBoxContainer/FPS")
 demon_health_bar = NodePath("MarginContainer/VBoxContainer/DemonBars/DemonHealth")
 demon_health_label = NodePath("MarginContainer/VBoxContainer/DemonBars/DemonHealth/Label")
 demon_label_prefix = "Your Health"
@@ -67,6 +68,10 @@ theme_override_font_sizes/font_size = 128
 text = "Enemy Health: 123456"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="FPS" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
 
 [node name="DemonBars" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

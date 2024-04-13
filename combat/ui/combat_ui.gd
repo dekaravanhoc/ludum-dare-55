@@ -4,6 +4,8 @@ extends Control
 @export var enemy_health: RangeStat
 @export var demon_health: RangeStat
 
+@export var fps_label: Label
+
 @export var demon_health_bar: ProgressBar
 @export var demon_health_label: Label
 @export var demon_label_prefix: String
@@ -28,5 +30,6 @@ func _ready() -> void:
 	enemy_health.value_changed.connect(update_enemy_health_bar)
 	update_enemy_health_bar.call()
 
-
+func _process(delta: float) -> void:
+	fps_label.text = str(round(1 / delta))
 

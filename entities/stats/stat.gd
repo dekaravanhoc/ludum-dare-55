@@ -88,6 +88,28 @@ func remove_mod(mod: StatMod) -> bool:
 	return true
 
 
+func remove_all_mods() -> void:
+	mods = {
+	MOD_TYPE.BaseAdd : {
+		list = [], 
+		sum = 0.0
+	},
+	MOD_TYPE.BaseMult : {
+		list = [], 
+		sum = 1.0
+	},
+	MOD_TYPE.Add : {
+		list = [], 
+		sum = 0.0
+	},
+	MOD_TYPE.Mult : {
+		list = [], 
+		sum = 1.0
+	}
+}
+
+
+
 func modify_value_by_base_mult(value_to_modify: float) -> float:
 	return value_to_modify * mods[MOD_TYPE.BaseMult]
 
