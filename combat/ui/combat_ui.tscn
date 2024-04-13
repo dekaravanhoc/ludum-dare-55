@@ -61,6 +61,7 @@ vertical_alignment = 1
 [node name="DemonBars" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
+theme_override_constants/separation = 32
 
 [node name="DemonHealth" type="ProgressBar" parent="MarginContainer/VBoxContainer/DemonBars"]
 custom_minimum_size = Vector2(0, 156)

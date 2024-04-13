@@ -44,6 +44,7 @@ mesh = SubResource("PlaneMesh_c0ncx")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.815471, -0.387506, 0.429938, 0.114987, 0.836468, 0.535817, -0.567262, -0.387506, 0.726673, 6.35125, 7.23296, 10.4105)
+current = true
 fov = 50.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
