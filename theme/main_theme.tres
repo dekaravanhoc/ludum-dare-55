@@ -1,3 +1,29 @@
-[gd_resource type="Theme" format=3 uid="uid://8k8dbw68feyc"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://8k8dbw68feyc"]
+
+[ext_resource type="FontFile" uid="uid://br1uah0d8ildi" path="res://theme/assets/GrimoireOfDeath-Regular.ttf" id="1_s8hjq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kykw2"]
+bg_color = Color(0, 0, 0, 0.211765)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.176471, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hwvg5"]
+bg_color = Color(0.721569, 0, 0, 1)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.8, 0.8, 0.8, 0)
 
 [resource]
+default_font = ExtResource("1_s8hjq")
+default_font_size = 32
+MarginContainer/constants/margin_bottom = 128
+MarginContainer/constants/margin_left = 128
+MarginContainer/constants/margin_right = 128
+MarginContainer/constants/margin_top = 128
+ProgressBar/styles/background = SubResource("StyleBoxFlat_kykw2")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_hwvg5")

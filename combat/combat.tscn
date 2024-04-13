@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://xm3d2betvwul"]
+[gd_scene load_steps=9 format=3 uid="uid://xm3d2betvwul"]
 
 [ext_resource type="PackedScene" uid="uid://deomwref7oitj" path="res://entities/demon/demon.tscn" id="1_mif6o"]
 [ext_resource type="PackedScene" uid="uid://c30ghnii7suyf" path="res://entities/enemy/enemy.tscn" id="2_2ddhi"]
 [ext_resource type="Script" path="res://combat/number_animation.gd" id="3_rtr1x"]
+[ext_resource type="FontFile" uid="uid://br1uah0d8ildi" path="res://theme/assets/GrimoireOfDeath-Regular.ttf" id="4_j4l4h"]
+[ext_resource type="PackedScene" uid="uid://c3vi8ywiuxrhe" path="res://combat/ui/combat_ui.tscn" id="5_nja5s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6t7if"]
 albedo_color = Color(0.233925, 0.233925, 0.233925, 1)
@@ -57,3 +59,6 @@ environment = SubResource("Environment_n3p5s")
 
 [node name="NumberAnimation" type="Node2D" parent="."]
 script = ExtResource("3_rtr1x")
+font = ExtResource("4_j4l4h")
+
+[node name="CombatUI" parent="." instance=ExtResource("5_nja5s")]

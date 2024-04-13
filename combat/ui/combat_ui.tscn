@@ -1,0 +1,88 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3vi8ywiuxrhe"]
+
+[ext_resource type="Theme" uid="uid://8k8dbw68feyc" path="res://theme/main_theme.tres" id="1_pgjxw"]
+[ext_resource type="Script" path="res://combat/ui/combat_ui.gd" id="1_tuwyw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k6x4p"]
+bg_color = Color(1, 1, 1, 0.254902)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.470076, 0.470076, 0.470075, 1)
+
+[node name="CombatUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_pgjxw")
+script = ExtResource("1_tuwyw")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="EnemyHealth" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 156)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_k6x4p")
+value = 50.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/EnemyHealth"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -454.5
+offset_top = -59.0
+offset_right = 454.5
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 128
+text = "Enemy Health: 123456"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DemonBars" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="DemonHealth" type="ProgressBar" parent="MarginContainer/VBoxContainer/DemonBars"]
+custom_minimum_size = Vector2(0, 156)
+layout_mode = 2
+size_flags_vertical = 1
+value = 50.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/DemonBars/DemonHealth"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -454.5
+offset_top = -59.0
+offset_right = 454.5
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 128
+text = "Your Health: 123456"
+horizontal_alignment = 1
+vertical_alignment = 1
