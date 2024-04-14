@@ -1,10 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1mcmqoo35nxq"]
+[gd_scene load_steps=3 format=3 uid="uid://b1mcmqoo35nxq"]
 
 [ext_resource type="Theme" uid="uid://8k8dbw68feyc" path="res://theme/main_theme.tres" id="1_a430r"]
 [ext_resource type="Script" path="res://demon_realm/ui/request_ui.gd" id="2_dggtu"]
-[ext_resource type="PackedScene" uid="uid://bl4c5qnrdnfe4" path="res://demon_realm/ui/single_request.tscn" id="2_ic1lg"]
 
-[node name="RequestUI" type="Control"]
+[node name="RequestUI" type="Control" node_paths=PackedStringArray("sign_contract_button", "request_container", "reputation_amount")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,6 +12,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_a430r")
 script = ExtResource("2_dggtu")
+sign_contract_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/SignButton")
+request_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/RequestContainer")
+reputation_amount = NodePath("PanelContainer/MarginContainer/VBoxContainer/Reputation/Amount")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -43,7 +45,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 text = "Reputation: "
 
-[node name="Number" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Reputation"]
+[node name="Amount" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Reputation"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "100000"
@@ -53,100 +55,24 @@ layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="RequestContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 theme_override_constants/h_separation = 64
 theme_override_constants/v_separation = 64
-columns = 3
+columns = 2
 
-[node name="SingleRequest" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("2_ic1lg")]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="SingleRequest2" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("2_ic1lg")]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="SingleRequest3" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("2_ic1lg")]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="SingleRequest4" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("2_ic1lg")]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="SingleRequest5" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("2_ic1lg")]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="SingleRequest6" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("2_ic1lg")]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="SingleRequest7" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("2_ic1lg")]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="SingleRequest8" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("2_ic1lg")]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="SingleRequest9" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("2_ic1lg")]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="SingleRequest10" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("2_ic1lg")]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="SingleRequest11" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("2_ic1lg")]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="SingleRequest12" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("2_ic1lg")]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="SingleRequest13" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("2_ic1lg")]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="SingleRequest14" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("2_ic1lg")]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="SingleRequest15" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("2_ic1lg")]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="SingleRequest16" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("2_ic1lg")]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="SingleRequest17" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("2_ic1lg")]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="SignButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

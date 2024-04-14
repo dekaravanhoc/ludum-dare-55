@@ -1,6 +1,8 @@
 class_name Combat
 extends Node3D
 
+signal combat_finished
+
 @export var enemy: Enemy
 @export var demon: Demon
 
@@ -12,17 +14,15 @@ const base_crit_multiplier: float = 1.5
 static var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 
-func _ready() -> void:
-	start_combat([Enemy.EnemyTypes.Soldier, Enemy.EnemyTypes.Archer], 10000)
-
-
-func start_combat(enemy_types: Array[Enemy.EnemyType], experience: int) -> void:
-	enemy.build_enemy(enemy_types, experience)
-	demon.start_combat()
+func start_combat(request: SummonRequest) -> void:
+	enemy.build_enemy(request)
+	demon.start_combat(request)
+	demon.demon_defeated.connect(func() -> void: combat_finished.emit())
+	demon.demon_won.connect(func() -> void: combat_finished.emit())
 
 
 static func getHitDamage(_damage: int, _defense: int) -> int:
-	return _damage / _defense
+	return _damage - _defense
 
 
 static func getCooldown(_agility: int) -> float:
@@ -31,7 +31,7 @@ static func getCooldown(_agility: int) -> float:
 
 static func getDamage(_strength: int, _isCrit: bool) -> int:
 	var crit_multiplier: float = base_crit_multiplier if _isCrit else 1.0
-	return base_damage * _strength * rng.randf_range(0.9, 1.1) * crit_multiplier
+	return roundi(base_damage * _strength * rng.randf_range(0.9, 1.1) * crit_multiplier)
 
 
 static func getCrit(_luck: float) -> bool:
