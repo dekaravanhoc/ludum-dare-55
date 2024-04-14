@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://8h5eojwoh1al"]
+
+[ext_resource type="Shader" path="res://entities/demon/summon_effect/small_particle.gdshader" id="1_3hm2w"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_3hm2w")
+shader_parameter/color = Color(0.999861, 0, 0.0276629, 1)
+shader_parameter/bloom = 67.085

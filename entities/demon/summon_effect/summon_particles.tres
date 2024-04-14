@@ -1,0 +1,38 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=5 format=3 uid="uid://cxje2g7hckwyx"]
+
+[sub_resource type="Gradient" id="Gradient_motju"]
+offsets = PackedFloat32Array(0, 0.502203, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_n2e7d"]
+gradient = SubResource("Gradient_motju")
+
+[sub_resource type="Curve" id="Curve_4u2ej"]
+_data = [Vector2(0.00622407, 0.0139318), 0.0, 0.230945, 0, 0, Vector2(0.497925, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.107256, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_msb02"]
+curve = SubResource("Curve_4u2ej")
+
+[resource]
+lifetime_randomness = 1.0
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+direction = Vector3(0, 1, 0)
+spread = 80.64
+initial_velocity_min = 1.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, 4, 0)
+scale_min = 0.01
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_msb02")
+color_ramp = SubResource("GradientTexture1D_n2e7d")
+hue_variation_max = 1.0
+anim_speed_min = 1.0
+anim_speed_max = 10.0
+anim_offset_max = 1.0
+turbulence_enabled = true
+turbulence_noise_scale = 3.0
