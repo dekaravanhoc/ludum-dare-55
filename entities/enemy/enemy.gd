@@ -14,6 +14,7 @@ class EnemyType:
 	var defense_mod: float
 	var luck_mod: float
 	var position: Position
+	var number_of_enemies_to_place: int
 
 	var multimesh_instance: MultiMeshInstance3D = MultiMeshInstance3D.new()
 
@@ -40,33 +41,48 @@ class EnemyType:
 		luck_mod = luck_mod_to_use
 		position = position_to_use
 
+	
+	func get_strength() -> float:
+		return health_mod + strength_mod + agility_mod + defense_mod + luck_mod
 
-static var EnemyTypes: Dictionary = {
-	Soldier =
-	EnemyType.new(
-		"Soldier",
-		preload("res://entities/enemy/meshes/soldier.tres"),
-		preload("res://entities/enemy/assets/placeholder_icon.png"),
-		0.5,
-		0,
-		0,
-		0,
-		0,
-		EnemyType.Position.FRONT
-	),
-	Archer =
-	EnemyType.new(
-		"Archer",
-		preload("res://entities/enemy/meshes/archer.tres"),
-		preload("res://entities/enemy/assets/placeholder_icon.png"),
-		0,
-		0.25,
-		0.5,
-		-0.25,
-		0,
-		EnemyType.Position.BACK
-	)
-}
+
+
+class EnemyTypes:
+	const NUMBER_OF_ENEMY_TYPES: int = 2
+	static func get_soldier() -> EnemyType:
+		return EnemyType.new(
+			"Soldier",
+			preload("res://entities/enemy/meshes/soldier.tres"),
+			preload("res://entities/enemy/assets/placeholder_icon.png"),
+			0.25,
+			0,
+			-0.25,
+			0,
+			0,
+			EnemyType.Position.FRONT
+		)
+	static func get_archer() -> EnemyType:
+		return EnemyType.new(
+			"Archer",
+			preload("res://entities/enemy/meshes/archer.tres"),
+			preload("res://entities/enemy/assets/placeholder_icon.png"),
+			-0.25,
+			0.25,
+			0.25,
+			-0.25,
+			0,
+			EnemyType.Position.BACK
+		)
+	
+	static func get_random_enemy_type() -> EnemyType:
+		match(randi_range(1, NUMBER_OF_ENEMY_TYPES)):
+			1:
+				return get_soldier()
+			2:
+				return get_archer()
+			_:
+				return get_soldier()
+
 
 enum State { PREPARE, FIGHT, WIN, LOSS }
 
@@ -84,46 +100,58 @@ var enemy_types: Array[EnemyType]
 var current_state: State = State.PREPARE
 
 
-func build_enemy(enemy_types_to_use: Array[EnemyType], experience: int) -> void:
-	enemy_types = enemy_types_to_use
-	_build_base_stats(experience)
+func build_enemy(request: SummonRequest) -> void:
+	enemy_types = request.enemy_types
+	_build_base_stats(request.exp_multiplier)
+	print("Health: %d, Strengh: %d, Agility: %d, Defense: %d, Luck: %d" % [health.value, strength.value, agility.value, defense.value, luck.value])
 	_modify_stats()
-	_place_meshes(experience)
+	print("Health: %d, Strengh: %d, Agility: %d, Defense: %d, Luck: %d" % [health.value, strength.value, agility.value, defense.value, luck.value])
+	_place_meshes(roundi(request.exp_multiplier))
 
 
 func hit(damage: int) -> int:
-	var true_damage:int = Combat.getHitDamage(damage, defense.value)
+	var true_damage:int = Combat.getHitDamage(damage, roundi(defense.value))
 	health.value -= true_damage
 	if(health.value  <= 0):
 		current_state = State.LOSS
 		enemy_defeated.emit()
 	return true_damage
 
+func _exit_tree() -> void:
+	health.remove_all_mods()
+	strength.remove_all_mods()
+	agility.remove_all_mods()
+	defense.remove_all_mods()
+	luck.remove_all_mods()
 
-func _place_meshes(experience: int) -> void:
+
+func _place_meshes(muliplyer: int) -> void:
 	enemy_types.sort_custom(func(a: EnemyType, b: EnemyType) -> bool: return a.position == EnemyType.Position.FRONT and b.position == EnemyType.Position.BACK) 
-	var number_of_enemies: int = maxi(int(experience / 100.0), 1)
-	print("Number of Enemies: %d" % number_of_enemies)
+	var number_of_enemies: int = muliplyer
+	var number_of_enemies_per_type: int = floori(number_of_enemies / float(enemy_types.size()))
+	print("Number of Enemies: %d, Number of Enemies per Type: %d, Size: %d" % [number_of_enemies, number_of_enemies_per_type, enemy_types.size()])
 	var number_of_enemies_x: int = ceil(sqrt(number_of_enemies))
 	var number_of_enemies_y: int = number_of_enemies_x
 	var starting_x_position: float = ((number_of_enemies_x - 1) / 2.0) * army_grid_size.x
 	var current_placement_position: Vector3 = Vector3(starting_x_position, 0.5, 0)
 	var current_enemy_type_index: int = 0
-	var number_till_next_type: int = ceil(number_of_enemies / float(enemy_types.size()))
 	for enemy: EnemyType in enemy_types:
-		enemy.multimesh_instance.multimesh.instance_count = number_till_next_type
+		enemy.number_of_enemies_to_place = number_of_enemies_per_type 
+		enemy.multimesh_instance.multimesh.instance_count = number_of_enemies_per_type
 		add_child(enemy.multimesh_instance)
+	if (number_of_enemies % enemy_types.size()) > 0:
+		enemy_types[-1].number_of_enemies_to_place += 1
+		enemy_types[-1].multimesh_instance.multimesh.instance_count += 1
 	for y: int in number_of_enemies_y:
 		for x: int in number_of_enemies_x:
 			var enemy: EnemyType = enemy_types[current_enemy_type_index]
-			enemy.multimesh_instance.multimesh.set_instance_transform(number_till_next_type - 1, Transform3D(Basis(), current_placement_position))
+			enemy.multimesh_instance.multimesh.set_instance_transform(enemy.number_of_enemies_to_place - 1, Transform3D(Basis(), current_placement_position))
 			current_placement_position.x -= army_grid_size.x
-			number_till_next_type -= 1
-			if number_till_next_type == 0:
+			enemy.number_of_enemies_to_place -= 1
+			if enemy.number_of_enemies_to_place == 0:
 				current_enemy_type_index += 1
 				if current_enemy_type_index == enemy_types.size():
 					return
-				number_till_next_type = ceil(number_of_enemies / float(enemy_types.size()))
 		current_placement_position.z -= army_grid_size.y
 		current_placement_position.x = starting_x_position
 	
@@ -155,49 +183,20 @@ func _modify_stats() -> void:
 	defense.add_mod(defense_mod)
 	luck.add_mod(luck_mod)
 
-	print(health.value, strength.value, agility.value, defense.value, luck.value)
 
 
-func _build_base_stats(experience: int) -> void:
-	health.add_mod(_get_health_mod_by_exp(health.max_value, experience))
+func _build_base_stats(multiplyer: float) -> void:
+	_base_stat_modify(health, multiplyer)
 	health.value = health.max_value
-	strength.add_mod(_get_strength_mod_by_exp(strength.value, experience))
-	agility.add_mod(_get_agility_mod_by_exp(agility.value, experience))
-	defense.add_mod(_get_defense_mod_by_exp(defense.value, experience))
-	luck.add_mod(_get_luck_mod_by_exp(luck.value, experience))
+	_base_stat_modify(strength, multiplyer)
+	_base_stat_modify(agility, multiplyer)
+	_base_stat_modify(defense, multiplyer)
+	_base_stat_modify(luck, multiplyer)
 
-
-func _get_health_mod_by_exp(health_to_modify: float, experience: int) -> StatMod:
+func _base_stat_modify(stat: Stat, multiplyer: float) -> void:
 	var mod: StatMod = StatMod.new()
-	mod.type = Stat.MOD_TYPE.BaseAdd
-	mod.value = (maxf(1.0, experience / 100.0) - 1.0) * health_to_modify
-	return mod
+	mod.type = Stat.MOD_TYPE.BaseMult
+	mod.value = maxf(0, multiplyer - 1)
+	stat.add_mod(mod)
 
-
-func _get_strength_mod_by_exp(strength_to_modify: float, experience: int) -> StatMod:
-	var mod: StatMod = StatMod.new()
-	mod.type = Stat.MOD_TYPE.BaseAdd
-	mod.value = (maxf(1.0, experience / 100.0) - 1.0) * strength_to_modify
-	return mod
-
-
-func _get_agility_mod_by_exp(agility_to_modify: float, experience: int) -> StatMod:
-	var mod: StatMod = StatMod.new()
-	mod.type = Stat.MOD_TYPE.BaseAdd
-	mod.value = (maxf(1.0, experience / 100.0) - 1.0) * agility_to_modify
-	return mod
-
-
-func _get_defense_mod_by_exp(defense_to_modify: float, experience: int) -> StatMod:
-	var mod: StatMod = StatMod.new()
-	mod.type = Stat.MOD_TYPE.BaseAdd
-	mod.value = (maxf(1.0, experience / 100.0) - 1.0) * defense_to_modify
-	return mod
-
-
-func _get_luck_mod_by_exp(luck_to_modify: float, experience: int) -> StatMod:
-	var mod: StatMod = StatMod.new()
-	mod.type = Stat.MOD_TYPE.BaseAdd
-	mod.value = (maxf(1.0, experience / 100.0) - 1.0) * luck_to_modify
-	return mod
 

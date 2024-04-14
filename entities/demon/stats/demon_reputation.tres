@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="RangeStat" load_steps=2 format=3 uid="uid://dn7olj8eefnak"]
+[gd_resource type="Resource" script_class="RangeStat" load_steps=2 format=3 uid="uid://bqnabw38cic7"]
 
-[ext_resource type="Script" path="res://entities/stats/range_stat.gd" id="1_lu63f"]
+[ext_resource type="Script" path="res://entities/stats/range_stat.gd" id="1_1t3se"]
 
 [resource]
-script = ExtResource("1_lu63f")
+script = ExtResource("1_1t3se")
 min_value = 0.0
 stat_name = "Reputation"
 base_value = 10.0

@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_ybel0")
 stat_name = "Strength"
-base_value = 10.0
+base_value = 1.0

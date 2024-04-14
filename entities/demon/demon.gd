@@ -6,6 +6,7 @@ extends Node3D
 
 @export var blood_current: Stat
 @export var blood_earned: Stat
+@export var experience_current: Stat
 @export var reputation: Stat
 @export var health: RangeStat
 @export var defense: Stat
@@ -14,6 +15,7 @@ extends Node3D
 @export var agility: Stat
 
 signal demon_defeated
+signal demon_won
 
 var cooldown: float = 0
 var currentState: DemonState = DemonState.DEMONREALM
@@ -21,12 +23,18 @@ var currentState: DemonState = DemonState.DEMONREALM
 enum DemonState { FIGHT, LOSS, WIN, DEMONREALM }
 
 
-func start_combat() -> void:
+func start_combat(request: SummonRequest) -> void:
+	blood_current.value += request.blood_gain
 	currentState = DemonState.FIGHT
 	cooldown = Combat.getCooldown(roundi(agility.value))
 	health.value = health.max_value
 	if enemy:
-		enemy.enemy_defeated.connect(func() -> void: currentState = DemonState.WIN)
+		enemy.enemy_defeated.connect(
+			func() -> void: 
+				currentState = DemonState.WIN
+				experience_current.value += request.exp_gain
+				demon_won.emit()
+				)
 
 
 func _process(_delta: float) -> void:

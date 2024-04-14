@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_f7v4c")
 stat_name = "Knowledge"
-base_value = 1.0
+base_value = 0.0

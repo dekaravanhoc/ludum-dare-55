@@ -1,7 +1,101 @@
-[gd_scene load_steps=2 format=3 uid="uid://cct6pthb2ry00"]
+[gd_scene load_steps=3 format=3 uid="uid://cct6pthb2ry00"]
 
-[ext_resource type="PackedScene" uid="uid://xm3d2betvwul" path="res://combat/combat.tscn" id="1_0pms1"]
+[ext_resource type="Script" path="res://main.gd" id="1_jatg1"]
+[ext_resource type="Theme" uid="uid://8k8dbw68feyc" path="res://theme/main_theme.tres" id="2_5l2mi"]
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node3D" node_paths=PackedStringArray("start_button", "grow_button", "credits_button", "exit_button", "menu", "credits", "grow")]
+script = ExtResource("1_jatg1")
+start_button = NodePath("MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Menu/VBoxContainer/Start")
+grow_button = NodePath("MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Menu/VBoxContainer/Grow")
+credits_button = NodePath("MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Menu/VBoxContainer/Credits")
+exit_button = NodePath("MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Menu/VBoxContainer/Exit")
+menu = NodePath("MainMenu")
+credits = NodePath("MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Credits")
+grow = NodePath("MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Grow")
 
-[node name="Combat" parent="." instance=ExtResource("1_0pms1")]
+[node name="MainMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_5l2mi")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="Titel" type="Label" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 256
+text = "THE DEMON"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+theme_override_constants/separation = 128
+
+[node name="Grow" type="PanelContainer" parent="MainMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Credits" type="PanelContainer" parent="MainMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(1080, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Credits"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Credits/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Thanks for Playing
+
+Game:
+Dekara
+Lyred
+
+Assets:
+blablabla
+"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Menu" type="PanelContainer" parent="MainMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Menu"]
+layout_mode = 2
+
+[node name="Start" type="Button" parent="MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Menu/VBoxContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="Grow" type="Button" parent="MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Menu/VBoxContainer"]
+layout_mode = 2
+text = "Grow"
+
+[node name="Credits" type="Button" parent="MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Menu/VBoxContainer"]
+layout_mode = 2
+text = "Credits
+"
+
+[node name="Exit" type="Button" parent="MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Menu/VBoxContainer"]
+layout_mode = 2
+text = "Exit
+"

@@ -14,75 +14,114 @@ grow_vertical = 2
 theme = ExtResource("1_jx7sf")
 script = ExtResource("2_fhpir")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="TabContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+tab_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="Stats" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 64
 theme_override_constants/margin_top = 64
 theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 64
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Stats"]
 layout_mode = 2
 theme_override_constants/separation = 128
 
-[node name="Knowledge" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Knowledge" type="HBoxContainer" parent="PanelContainer/Stats/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Name" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Knowledge"]
+[node name="Name" type="Label" parent="PanelContainer/Stats/VBoxContainer/Knowledge"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Knowledge: "
 
-[node name="Number" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Knowledge"]
+[node name="Number" type="Label" parent="PanelContainer/Stats/VBoxContainer/Knowledge"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "100000"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/Stats/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Stats/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
 size_flags_vertical = 6
 theme_override_constants/separation = 32
 
-[node name="StatUpdate" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_1yamj")]
+[node name="StatUpdate" parent="PanelContainer/Stats/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_1yamj")]
 layout_mode = 2
 
-[node name="StatUpdate2" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_1yamj")]
+[node name="StatUpdate2" parent="PanelContainer/Stats/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_1yamj")]
 layout_mode = 2
 
-[node name="StatName" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/StatUpdate2" index="0"]
-text = "Defense"
-
-[node name="CurrentLevel" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/StatUpdate2" index="1"]
-text = "35435
-"
-
-[node name="Cost" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/StatUpdate2" index="3"]
-text = "-1000 B"
-
-[node name="StatUpdate3" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_1yamj")]
+[node name="StatUpdate3" parent="PanelContainer/Stats/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_1yamj")]
 layout_mode = 2
 
-[node name="StatUpdate4" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_1yamj")]
+[node name="StatUpdate4" parent="PanelContainer/Stats/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_1yamj")]
 layout_mode = 2
 
-[node name="StatUpdate5" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_1yamj")]
+[node name="StatUpdate5" parent="PanelContainer/Stats/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_1yamj")]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="SaveStatsButton" type="Button" parent="PanelContainer/Stats/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "Save Stat Update"
+text = "Save Stats Update"
 
-[editable path="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/StatUpdate2"]
+[node name="Skills" type="MarginContainer" parent="PanelContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Skills"]
+layout_mode = 2
+theme_override_constants/separation = 128
+
+[node name="Knowledge" type="HBoxContainer" parent="PanelContainer/Skills/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Name" type="Label" parent="PanelContainer/Skills/VBoxContainer/Knowledge"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Knowledge: "
+
+[node name="Number" type="Label" parent="PanelContainer/Skills/VBoxContainer/Knowledge"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "100000"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/Skills/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Skills/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/separation = 32
+
+[node name="AquireSkillButton" type="Button" parent="PanelContainer/Skills/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Aquire  Skill"

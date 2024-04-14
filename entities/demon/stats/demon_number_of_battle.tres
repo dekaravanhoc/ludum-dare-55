@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Stat" load_steps=2 format=3 uid="uid://ct0ly0x4e614s"]
+
+[ext_resource type="Script" path="res://entities/stats/stat.gd" id="1_mghcs"]
+
+[resource]
+script = ExtResource("1_mghcs")
+stat_name = "Number of Battle"
+base_value = 1.0

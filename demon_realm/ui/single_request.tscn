@@ -1,11 +1,70 @@
-[gd_scene load_steps=2 format=3 uid="uid://bl4c5qnrdnfe4"]
+[gd_scene load_steps=4 format=3 uid="uid://bl4c5qnrdnfe4"]
 
 [ext_resource type="Theme" uid="uid://8k8dbw68feyc" path="res://theme/main_theme.tres" id="1_r2qt0"]
+[ext_resource type="Script" path="res://demon_realm/ui/single_request.gd" id="2_85ljb"]
+[ext_resource type="Texture2D" uid="uid://g8ghicnh3lou" path="res://demon_realm/ui/assets/summon_request_icon.png" id="2_k3ilv"]
 
-[node name="SingleRequest" type="PanelContainer"]
-custom_minimum_size = Vector2(512, 512)
-offset_right = 384.0
-offset_bottom = 384.0
+[node name="SingleRequest" type="MarginContainer" node_paths=PackedStringArray("battle_name", "blood_amount", "button", "summon_icon")]
+offset_right = 486.0
+offset_bottom = 290.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_r2qt0")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("2_85ljb")
+battle_name = NodePath("PanelContainer/VBoxContainer/BattleName")
+blood_amount = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Amount")
+button = NodePath("Button")
+summon_icon = NodePath("Control/SummonRequestIcon")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="BattleName" type="Label" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Battle of the golden Cross"
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Blood" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Blood Gained: "
+
+[node name="Amount" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "      1"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+theme_type_variation = &"RequestButton"
+toggle_mode = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="SummonRequestIcon" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -256.0
+offset_top = -64.0
+offset_bottom = 192.0
+grow_horizontal = 0
+size_flags_horizontal = 10
+size_flags_vertical = 0
+texture = ExtResource("2_k3ilv")
