@@ -96,6 +96,12 @@ const army_grid_size: Vector2 = Vector2(1.5, 1.5)
 
 signal enemy_defeated
 
+const base_cooldown: float = 3
+const base_damage: int = 30
+const base_crit_perc: float = .1
+const base_crit_multiplier: float = 2.0
+
+var cooldown: float = 0
 var enemy_types: Array[EnemyType]
 var current_state: State = State.PREPARE
 
@@ -110,7 +116,7 @@ func build_enemy(request: SummonRequest) -> void:
 
 
 func hit(damage: int) -> int:
-	var true_damage:int = Combat.getHitDamage(damage, roundi(defense.value))
+	var true_damage:int = _get_hit_damage(damage)
 	health.value -= true_damage
 	if(health.value  <= 0):
 		current_state = State.LOSS
@@ -188,10 +194,10 @@ func _modify_stats() -> void:
 func _build_base_stats(multiplyer: float) -> void:
 	_base_stat_modify(health, multiplyer)
 	health.value = health.max_value
-	_base_stat_modify(strength, multiplyer)
-	_base_stat_modify(agility, multiplyer)
-	_base_stat_modify(defense, multiplyer)
-	_base_stat_modify(luck, multiplyer)
+	_base_stat_modify(strength, pow(10, 0.1) * multiplyer)
+	_base_stat_modify(agility, pow(multiplyer, 0.5))
+	_base_stat_modify(defense, 5 + pow(20, 0.1) * multiplyer)
+	_base_stat_modify(luck, pow(multiplyer, 0.2))
 
 func _base_stat_modify(stat: Stat, multiplyer: float) -> void:
 	var mod: StatMod = StatMod.new()
@@ -200,3 +206,20 @@ func _base_stat_modify(stat: Stat, multiplyer: float) -> void:
 	stat.add_mod(mod)
 
 
+func _get_hit_damage(damage: int) -> int:
+	var hit_damage: int = roundi((damage - roundi(pow(defense.value / _get_cooldown(), 1.01))) / (base_crit_multiplier if _is_reduction_crit() else 1.0)) 
+	return hit_damage
+
+func _get_cooldown() -> float:
+	return base_cooldown - pow(agility.value, 0.2) + 1
+
+
+func _get_damage(is_crit: bool) -> int:
+	return roundi(base_damage + pow(strength.value, 1.05) * randf_range(0.9, 1.1) * (base_crit_multiplier if is_crit else 1.0))
+
+
+func _is_crit() -> bool:
+	return randf_range(0.0, 1.0) <= (pow(luck.value * base_crit_perc, 0.5) - 0.2)
+
+func _is_reduction_crit() -> bool:
+	return randf_range(0.0, 1.0) <= (pow(luck.value * base_crit_perc, 0.5) - 0.2) / 2

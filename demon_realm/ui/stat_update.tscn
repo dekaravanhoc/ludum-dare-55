@@ -1,11 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://ct3typr82rc2f"]
+[gd_scene load_steps=3 format=3 uid="uid://ct3typr82rc2f"]
 
 [ext_resource type="Theme" uid="uid://8k8dbw68feyc" path="res://theme/main_theme.tres" id="1_ewep5"]
+[ext_resource type="Script" path="res://demon_realm/ui/stat_update.gd" id="2_00plu"]
 
-[node name="StatUpdate" type="HBoxContainer"]
+[node name="StatUpdate" type="HBoxContainer" node_paths=PackedStringArray("stat_name", "stat_level", "stat_update_amount", "stat_costs", "add_button", "remove_button")]
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme = ExtResource("1_ewep5")
+script = ExtResource("2_00plu")
+stat_name = NodePath("StatName")
+stat_level = NodePath("CurrentLevel")
+stat_update_amount = NodePath("AddLevel")
+stat_costs = NodePath("Cost")
+add_button = NodePath("AddButton")
+remove_button = NodePath("SubstractButton")
 
 [node name="StatName" type="Label" parent="."]
 layout_mode = 2

@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbmmq04x388mw"]
+[gd_scene load_steps=9 format=3 uid="uid://dbmmq04x388mw"]
 
 [ext_resource type="Theme" uid="uid://8k8dbw68feyc" path="res://theme/main_theme.tres" id="1_jx7sf"]
 [ext_resource type="PackedScene" uid="uid://ct3typr82rc2f" path="res://demon_realm/ui/stat_update.tscn" id="2_1yamj"]
 [ext_resource type="Script" path="res://demon_realm/ui/level_up_ui.gd" id="2_fhpir"]
+[ext_resource type="Resource" uid="uid://dpiegvcel248p" path="res://entities/demon/stats/demon_hp.tres" id="4_yuxa8"]
+[ext_resource type="Resource" uid="uid://dkgatmwu1sy87" path="res://entities/demon/stats/demon_strength.tres" id="5_6g3uu"]
+[ext_resource type="Resource" uid="uid://dea0t6eveqoe6" path="res://entities/demon/stats/demon_agility.tres" id="6_658q6"]
+[ext_resource type="Resource" uid="uid://7nrl1v3okxlr" path="res://entities/demon/stats/demon_defense.tres" id="7_o5iug"]
+[ext_resource type="Resource" uid="uid://c00k3xdkx2gxe" path="res://entities/demon/stats/demon_luck.tres" id="8_e3wb3"]
 
-[node name="LevelUPUI" type="Control"]
+[node name="LevelUPUI" type="Control" node_paths=PackedStringArray("current_exp")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,6 +18,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_jx7sf")
 script = ExtResource("2_fhpir")
+current_exp = NodePath("PanelContainer/Stats/VBoxContainer/Knowledge/Number")
 
 [node name="PanelContainer" type="TabContainer" parent="."]
 layout_mode = 1
@@ -60,20 +66,40 @@ size_flags_horizontal = 6
 size_flags_vertical = 6
 theme_override_constants/separation = 32
 
-[node name="StatUpdate" parent="PanelContainer/Stats/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_1yamj")]
+[node name="HealthUpdate" parent="PanelContainer/Stats/VBoxContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("save_button") instance=ExtResource("2_1yamj")]
 layout_mode = 2
+stat_for_update = ExtResource("4_yuxa8")
+costs_to_use = 500
+update_amount_to_use = 100
+save_button = NodePath("../../../SaveStatsButton")
 
-[node name="StatUpdate2" parent="PanelContainer/Stats/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_1yamj")]
+[node name="StrengthUpdate" parent="PanelContainer/Stats/VBoxContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("save_button") instance=ExtResource("2_1yamj")]
 layout_mode = 2
+stat_for_update = ExtResource("5_6g3uu")
+costs_to_use = 200
+update_amount_to_use = 1
+save_button = NodePath("../../../SaveStatsButton")
 
-[node name="StatUpdate3" parent="PanelContainer/Stats/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_1yamj")]
+[node name="AgilityUpdate" parent="PanelContainer/Stats/VBoxContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("save_button") instance=ExtResource("2_1yamj")]
 layout_mode = 2
+stat_for_update = ExtResource("6_658q6")
+costs_to_use = 400
+update_amount_to_use = 1
+save_button = NodePath("../../../SaveStatsButton")
 
-[node name="StatUpdate4" parent="PanelContainer/Stats/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_1yamj")]
+[node name="DefenseUpdate" parent="PanelContainer/Stats/VBoxContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("save_button") instance=ExtResource("2_1yamj")]
 layout_mode = 2
+stat_for_update = ExtResource("7_o5iug")
+costs_to_use = 600
+update_amount_to_use = 1
+save_button = NodePath("../../../SaveStatsButton")
 
-[node name="StatUpdate5" parent="PanelContainer/Stats/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_1yamj")]
+[node name="LuckUpdate" parent="PanelContainer/Stats/VBoxContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("save_button") instance=ExtResource("2_1yamj")]
 layout_mode = 2
+stat_for_update = ExtResource("8_e3wb3")
+costs_to_use = 10000
+update_amount_to_use = 1
+save_button = NodePath("../../../SaveStatsButton")
 
 [node name="SaveStatsButton" type="Button" parent="PanelContainer/Stats/VBoxContainer"]
 layout_mode = 2
