@@ -33,13 +33,16 @@ script = ExtResource("1_56ajt")
 enemy = NodePath("Enemy")
 demon = NodePath("Demon")
 
-[node name="Demon" parent="." node_paths=PackedStringArray("enemy", "number_animation") instance=ExtResource("1_mif6o")]
+[node name="Demon" parent="." node_paths=PackedStringArray("enemy", "number_animation", "summon_animation") instance=ExtResource("1_mif6o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 enemy = NodePath("../Enemy")
 number_animation = NodePath("../NumberAnimation")
+summon_animation = NodePath("../Summon/AnimationPlayer")
 
-[node name="Enemy" parent="." instance=ExtResource("2_2ddhi")]
+[node name="Enemy" parent="." node_paths=PackedStringArray("demon", "number_animation") instance=ExtResource("2_2ddhi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+demon = NodePath("../Demon")
+number_animation = NodePath("../NumberAnimation")
 
 [node name="Summoner" type="Node3D" parent="."]
 
@@ -69,4 +72,9 @@ font = ExtResource("4_j4l4h")
 [node name="CombatUI" parent="." instance=ExtResource("5_nja5s")]
 
 [node name="Summon" parent="." instance=ExtResource("7_l57ba")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.05, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 5)
+
+[node name="Sprite3D" parent="Summon" index="2"]
+transform = Transform3D(1, 0, 0, 0, -3.61999e-06, 1, 0, -1, -3.61999e-06, 0, 0, 0)
+
+[editable path="Summon"]

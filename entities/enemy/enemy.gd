@@ -88,6 +88,9 @@ enum State { PREPARE, FIGHT, WIN, LOSS }
 
 const army_grid_size: Vector2 = Vector2(1.5, 1.5)
 
+@export var demon: Demon
+@export var number_animation: NumberAnimation
+
 @export var health: RangeStat
 @export var strength: Stat
 @export var agility: Stat
@@ -108,12 +111,15 @@ var current_state: State = State.PREPARE
 
 func build_enemy(request: SummonRequest) -> void:
 	enemy_types = request.enemy_types
+	cooldown = _get_cooldown()
 	_build_base_stats(request.exp_multiplier)
 	print("Health: %d, Strengh: %d, Agility: %d, Defense: %d, Luck: %d" % [health.value, strength.value, agility.value, defense.value, luck.value])
 	_modify_stats()
 	print("Health: %d, Strengh: %d, Agility: %d, Defense: %d, Luck: %d" % [health.value, strength.value, agility.value, defense.value, luck.value])
 	_place_meshes(roundi(request.exp_multiplier))
 
+func start_combat() -> void:
+	current_state = State.FIGHT
 
 func hit(damage: int) -> int:
 	var true_damage:int = _get_hit_damage(damage)
@@ -122,6 +128,25 @@ func hit(damage: int) -> int:
 		current_state = State.LOSS
 		enemy_defeated.emit()
 	return true_damage
+	
+func _process(_delta: float) -> void:
+	match current_state:
+		State.FIGHT:
+			cooldown -= _delta
+			if cooldown < 0:
+				_attack()
+				cooldown = _get_cooldown()
+
+func _attack() -> void:
+	var demon_screen_pos: Vector2 = get_viewport().get_camera_3d().unproject_position(
+		demon.position
+	)
+	var is_crit: bool = _is_crit()
+	var damage: int = _get_damage(is_crit)
+	var damage_text: String = "Crit" if is_crit else ""
+	var dealed_damage: int = demon.hit(damage)
+	number_animation.add_damage(demon_screen_pos, dealed_damage, Color.LIGHT_GRAY, damage_text)
+
 
 func _exit_tree() -> void:
 	health.remove_all_mods()

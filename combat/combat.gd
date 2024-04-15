@@ -9,7 +9,10 @@ signal combat_finished
 
 func start_combat(request: SummonRequest) -> void:
 	enemy.build_enemy(request)
-	demon.start_combat(request)
+	demon.build_demon(request)
+	
+	enemy.start_combat()
+	demon.start_combat()
 	demon.demon_defeated.connect(func() -> void: combat_finished.emit())
 	demon.demon_won.connect(func() -> void: combat_finished.emit())
 

@@ -3,6 +3,8 @@ extends Node3D
 
 @export var enemy: Enemy
 @export var number_animation: NumberAnimation
+@export var summon_animation: AnimationPlayer
+@export var demon_animation: AnimationPlayer
 
 @export var blood_current: Stat
 @export var blood_earned: Stat
@@ -18,6 +20,7 @@ signal demon_defeated
 signal demon_won
 
 const base_cooldown: float = 2
+const best_cooldown: float = 0.1
 const base_damage: int = 30
 const base_crit_perc: float = .1
 const base_crit_multiplier: float = 2.0
@@ -27,10 +30,13 @@ var currentState: DemonState = DemonState.DEMONREALM
 
 enum DemonState { FIGHT, LOSS, WIN, DEMONREALM }
 
+func _ready() -> void:
+	if summon_animation:
+		summon_animation.play("summon_demon")
+		demon_animation.play("summon")
 
-func start_combat(request: SummonRequest) -> void:
+func build_demon(request: SummonRequest) -> void:
 	blood_current.value += request.blood_gain
-	currentState = DemonState.FIGHT
 	cooldown = _get_cooldown()
 	health.value = health.max_value
 	if enemy:
@@ -40,7 +46,9 @@ func start_combat(request: SummonRequest) -> void:
 				experience_current.value += request.exp_gain
 				demon_won.emit()
 				)
-
+	
+func start_combat() -> void:
+	currentState = DemonState.FIGHT
 
 func _process(_delta: float) -> void:
 	match currentState:
@@ -86,8 +94,9 @@ func _get_hit_damage(damage: int) -> int:
 
 
 func _get_cooldown() -> float:
-	return base_cooldown - 0.025 * agility.value
-
+	var max_agility: int = 200
+	var agility_progress: float = clamp(agility.value/max_agility,0,1)
+	return best_cooldown + base_cooldown - base_cooldown * ease(agility_progress,.5)
 
 func _get_damage(is_crit: bool) -> int:
 	print(pow(strength.value, 2))
