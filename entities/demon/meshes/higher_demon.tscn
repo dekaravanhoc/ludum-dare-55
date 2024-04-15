@@ -7,6 +7,6 @@ albedo_color = Color(1, 0, 0, 1)
 material = SubResource("StandardMaterial3D_lpu78")
 size = Vector3(4, 10, 2)
 
-[node name="HigherDemon" type="MeshInstance3D"]
+[node name="HigherDemon2" type="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 mesh = SubResource("BoxMesh_uxjut")

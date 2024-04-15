@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cct6pthb2ry00"]
+[gd_scene load_steps=9 format=3 uid="uid://cct6pthb2ry00"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_jatg1"]
 [ext_resource type="Theme" uid="uid://8k8dbw68feyc" path="res://theme/main_theme.tres" id="2_5l2mi"]
 [ext_resource type="PackedScene" uid="uid://bao7svdtr1nin" path="res://entities/demon/demon_types/imp.tscn" id="2_aq3wk"]
 [ext_resource type="PackedScene" uid="uid://bnyy52ccutg2c" path="res://grow_ui.tscn" id="4_gkv08"]
+[ext_resource type="AudioStream" uid="uid://c3cmhaue4yl0g" path="res://assets/03. Cry No More.mp3" id="5_cp8wn"]
+[ext_resource type="AudioStream" uid="uid://hyrvh6544jnf" path="res://assets/07. Lone Wolf.mp3" id="6_77fux"]
 
 [sub_resource type="Gradient" id="Gradient_ul7uw"]
 colors = PackedColorArray(0.317647, 0, 0, 1, 0, 0, 0, 1)
@@ -13,9 +15,11 @@ gradient = SubResource("Gradient_ul7uw")
 fill = 1
 fill_from = Vector2(0.495413, 0.53211)
 
-[node name="Main" type="Node3D" node_paths=PackedStringArray("start_button", "grow_button", "credits_button", "exit_button", "scene_switch", "menu", "credits", "grow")]
+[node name="Main" type="Node3D" node_paths=PackedStringArray("bg_music", "combat_music", "start_button", "grow_button", "credits_button", "exit_button", "scene_switch", "menu", "credits", "grow")]
 script = ExtResource("1_jatg1")
 start_demon = ExtResource("2_aq3wk")
+bg_music = NodePath("BackgroundMusic")
+combat_music = NodePath("CombatMusic")
 start_button = NodePath("MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Menu/VBoxContainer/Start")
 grow_button = NodePath("MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Menu/VBoxContainer/Grow")
 credits_button = NodePath("MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Menu/VBoxContainer/Credits")
@@ -79,7 +83,7 @@ Dekara
 Lyred
 
 Assets:
-blablabla
+All by ourselfe except the song
 "
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -123,3 +127,15 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_h6drf")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_cp8wn")
+volume_db = -80.0
+autoplay = true
+bus = &"Background"
+
+[node name="CombatMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_77fux")
+volume_db = -80.0
+autoplay = true
+bus = &"Combat"

@@ -119,35 +119,11 @@ theme_override_constants/margin_bottom = 64
 layout_mode = 2
 theme_override_constants/separation = 128
 
-[node name="Knowledge" type="HBoxContainer" parent="PanelContainer/Skills/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Name" type="Label" parent="PanelContainer/Skills/VBoxContainer/Knowledge"]
-layout_mode = 2
-size_flags_horizontal = 0
-text = "Knowledge: "
-
-[node name="Number" type="Label" parent="PanelContainer/Skills/VBoxContainer/Knowledge"]
-layout_mode = 2
-size_flags_horizontal = 10
-text = "100000"
-
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/Skills/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-horizontal_scroll_mode = 0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Skills/VBoxContainer/ScrollContainer"]
+[node name="GitGut" type="Label" parent="PanelContainer/Skills/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-theme_override_constants/separation = 32
+text = "Get Gut. :P
 
-[node name="AquireSkillButton" type="Button" parent="PanelContainer/Skills/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "Aquire  Skill"
+Nothing There Yet"
+horizontal_alignment = 1

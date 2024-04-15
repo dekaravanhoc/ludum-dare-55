@@ -6,4 +6,4 @@
 script = ExtResource("1_omuvt")
 min_value = 0.0
 stat_name = "Health"
-base_value = 100.0
+base_value = 300.0

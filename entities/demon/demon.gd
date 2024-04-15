@@ -29,7 +29,7 @@ extends Node3D
 signal demon_defeated
 signal demon_won
 
-const base_cooldown: float = 2
+const base_cooldown: float = 1
 const best_cooldown: float = 0.1
 const base_damage: int = 30
 const base_crit_perc: float = .1
@@ -130,6 +130,7 @@ func summon(reverse: bool = false) -> void:
 
 func _defeat() -> void:
 	currentState = DemonState.LOSS
+	enemy.current_state = enemy.State.WIN
 	if summon_animation:
 		demon_animation.play("defeat_start")
 		await demon_animation.animation_finished

@@ -46,12 +46,12 @@ theme_override_constants/separation = 64
 [node name="GrowOption2" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_w2w1a")]
 layout_mode = 2
 demon_scene = ExtResource("2_k0ij6")
-blood_cost = 15
+blood_cost = 50
 
 [node name="GrowOption" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_w2w1a")]
 layout_mode = 2
 demon_scene = ExtResource("4_y7olg")
-blood_cost = 500
+blood_cost = 1000
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

@@ -15,7 +15,7 @@ func _init(first: bool = false) -> void:
 	difficulty = randi_range(-reputation_diff - 3, -reputation_diff + 3) if not first else 0
 	exp_gain = roundi(pow(exp_gain * maxi(1, int(number_of_battle.value) + difficulty), 1.07))
 	blood_gain = roundi(pow(blood_gain * maxi(1, int(number_of_battle.value) + difficulty), 2.5))
-	exp_multiplier = pow(maxi(1, int(number_of_battle.value) + difficulty), 2.0)
+	exp_multiplier = pow(maxi(1, int(number_of_battle.value) + difficulty), 2.7)
 	for n: int in min(exp_multiplier, Enemy.EnemyTypes.NUMBER_OF_ENEMY_TYPES * 2):
 		enemy_types.append(Enemy.EnemyTypes.get_random_enemy_type())
 	print("Blood Gain: %d, Exp Gain: %d, Multiplyer: %d, Difficulty: %d" % [blood_gain, exp_gain, exp_multiplier, difficulty])

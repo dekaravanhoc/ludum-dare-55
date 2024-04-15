@@ -53,7 +53,6 @@ spot_angle = 20.0
 
 [node name="DemonRealmCamera" type="Camera3D" parent="."]
 transform = Transform3D(-0.945519, 0.116673, -0.303944, 0, 0.93358, 0.358368, 0.325568, 0.338844, -0.882718, -4, 3, -4)
-current = true
 fov = 50.0
 
 [node name="CombatCamera" type="Camera3D" parent="."]

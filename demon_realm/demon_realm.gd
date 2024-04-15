@@ -20,6 +20,7 @@ func _ready() -> void:
 func add_demon(demon_to_use: Demon, with_animation: bool = true) -> void:
 	demon = demon_to_use
 	demon_position.add_child(demon)
+	demon.demon_realm_camera.make_current()
 	if with_animation:
 		await demon.summon()
 	ui.show()

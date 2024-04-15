@@ -2,6 +2,9 @@ extends Node3D
 
 @export var start_demon: PackedScene
 
+@export var bg_music: AudioStreamPlayer
+@export var combat_music: AudioStreamPlayer
+
 @export var start_button: Button
 @export var grow_button: Button
 @export var credits_button: Button
@@ -29,6 +32,8 @@ func _ready() -> void:
 	exit_button.pressed.connect(_exit)
 	grow.growth_selected.connect(_grow)
 
+	_fade_music(bg_music, combat_music)
+
 	current_demon_realm = demon_realm_scene.instantiate()
 	add_child(current_demon_realm)
 	var demon: Demon = current_demon.instantiate()
@@ -36,6 +41,12 @@ func _ready() -> void:
 	demon.add_mods()
 	current_demon_realm.ui.hide()
 
+
+func _fade_music(music_in: AudioStreamPlayer, music_out: AudioStreamPlayer) -> void:
+	var tween: Tween = create_tween()
+	tween.tween_property(music_in, "volume_db", 0, 0.5)
+	tween.parallel()
+	tween.tween_property(music_out, "volume_db", -80, 0.5)
 
 func _start_game() -> void:
 	var first_battle_request: SummonRequest = SummonRequest.new(true)
@@ -48,6 +59,7 @@ func _start_game() -> void:
 func _init_combat(request: SummonRequest) -> void:
 	await current_demon_realm.demon.summon(true)
 	_scene_switch_animation(func() -> void: 
+		# _fade_music(combat_music, bg_music)
 		current_combat = combat_scene.instantiate()
 		current_demon_realm.hide()
 		current_demon_realm.queue_free()
@@ -60,6 +72,7 @@ func _init_combat(request: SummonRequest) -> void:
 
 func _init_demon_realm() -> void:
 	_scene_switch_animation(func() -> void: 
+		# _fade_music(bg_music, combat_music)
 		current_combat.hide()
 		current_combat.queue_free()
 		current_demon_realm = demon_realm_scene.instantiate()

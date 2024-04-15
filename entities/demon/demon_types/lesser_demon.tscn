@@ -10,31 +10,31 @@
 [sub_resource type="Resource" id="Resource_4fprs"]
 script = ExtResource("2_qyb0v")
 type = 3
-value = 1.0
+value = 3.0
 mod_name = "Stat Modifier Y"
 
 [sub_resource type="Resource" id="Resource_74kcp"]
 script = ExtResource("2_qyb0v")
 type = 3
-value = 1.0
+value = 2.0
 mod_name = "Stat Modifier Y"
 
 [sub_resource type="Resource" id="Resource_nem17"]
 script = ExtResource("2_qyb0v")
 type = 3
-value = 1.0
+value = 2.0
 mod_name = "Stat Modifier Y"
 
 [sub_resource type="Resource" id="Resource_qgr0i"]
 script = ExtResource("2_qyb0v")
 type = 3
-value = 1.0
+value = 2.0
 mod_name = "Stat Modifier Y"
 
 [sub_resource type="Resource" id="Resource_r6xs3"]
 script = ExtResource("2_qyb0v")
 type = 3
-value = 1.0
+value = 2.0
 mod_name = "Stat Modifier Y"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jyshh"]
@@ -52,7 +52,7 @@ _data = {
 "summon": ExtResource("4_qutd3")
 }
 
-[node name="Demon" node_paths=PackedStringArray("demon_animation") instance=ExtResource("1_or1lj")]
+[node name="Demon2" node_paths=PackedStringArray("demon_animation") instance=ExtResource("1_or1lj")]
 demon_animation = NodePath("AnimationPlayer")
 demon_name = "Lesser Demon"
 health_mod = SubResource("Resource_4fprs")
