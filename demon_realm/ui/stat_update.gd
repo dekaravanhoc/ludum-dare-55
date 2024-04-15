@@ -19,7 +19,9 @@ var current_added_level: int = 0
 func _ready() -> void:
 	stat_name.text = stat_for_update.stat_name
 	stat_level.text = "%4d" % stat_for_update.value
-	stat_update_amount.text = "+%2d" % update_amount_to_use
+	stat_update_amount.text = (
+		"+%2d" % stat_for_update.modify_value_by_all_mult(update_amount_to_use)
+	)
 	stat_costs.text = "-%5d K" % costs_to_use
 
 	demon_exp.stat_modified.connect(_check_button_status)
@@ -34,7 +36,10 @@ var pressed_timer:SceneTreeTimer
 
 func _add_level() -> void:
 	current_added_level += update_amount_to_use
-	stat_level.text = "%4d" % (stat_for_update.value + current_added_level)
+	stat_level.text = (
+		"%4d"
+		% (stat_for_update.value + stat_for_update.modify_value_by_all_mult(current_added_level))
+	)
 	demon_exp.value -= costs_to_use
 	if(pressed_timer != null && pressed_timer.time_left > 0):
 		pressed_timer.timeout.disconnect(_add_level_loop)
@@ -56,7 +61,10 @@ func _add_level_loop() -> void:
 
 func _remove_level() -> void:
 	current_added_level -= update_amount_to_use
-	stat_level.text = "%4d" % (stat_for_update.value + current_added_level)
+	stat_level.text = (
+		"%4d"
+		% (stat_for_update.value + stat_for_update.modify_value_by_all_mult(current_added_level))
+	)
 	demon_exp.value += costs_to_use
 
 
@@ -76,4 +84,8 @@ func _save_stat() -> void:
 		stat_for_update.value = (stat_for_update as RangeStat).max_value
 	current_added_level = 0
 	_check_button_status()
+
+
+func _exit_tree() -> void:
+	_save_stat()
 

@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cct6pthb2ry00"]
+[gd_scene load_steps=7 format=3 uid="uid://cct6pthb2ry00"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_jatg1"]
 [ext_resource type="Theme" uid="uid://8k8dbw68feyc" path="res://theme/main_theme.tres" id="2_5l2mi"]
+[ext_resource type="PackedScene" uid="uid://bao7svdtr1nin" path="res://entities/demon/demon_types/imp.tscn" id="2_aq3wk"]
+[ext_resource type="PackedScene" uid="uid://bnyy52ccutg2c" path="res://grow_ui.tscn" id="4_gkv08"]
 
 [sub_resource type="Gradient" id="Gradient_ul7uw"]
 colors = PackedColorArray(0.317647, 0, 0, 1, 0, 0, 0, 1)
@@ -13,6 +15,7 @@ fill_from = Vector2(0.495413, 0.53211)
 
 [node name="Main" type="Node3D" node_paths=PackedStringArray("start_button", "grow_button", "credits_button", "exit_button", "scene_switch", "menu", "credits", "grow")]
 script = ExtResource("1_jatg1")
+start_demon = ExtResource("2_aq3wk")
 start_button = NodePath("MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Menu/VBoxContainer/Start")
 grow_button = NodePath("MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Menu/VBoxContainer/Grow")
 credits_button = NodePath("MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Menu/VBoxContainer/Credits")
@@ -46,7 +49,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 256
-text = "THE DEMON"
+text = "THE DEMON BLOCK"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -54,10 +57,9 @@ size_flags_horizontal = 8
 size_flags_vertical = 3
 theme_override_constants/separation = 128
 
-[node name="Grow" type="PanelContainer" parent="MainMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Grow" parent="MainMenu/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_gkv08")]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 6
 
 [node name="Credits" type="PanelContainer" parent="MainMenu/MarginContainer/VBoxContainer/HBoxContainer"]
 visible = false

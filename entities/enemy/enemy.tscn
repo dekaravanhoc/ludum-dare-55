@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c30ghnii7suyf"]
+[gd_scene load_steps=9 format=3 uid="uid://c30ghnii7suyf"]
 
 [ext_resource type="Script" path="res://entities/enemy/enemy.gd" id="1_hbrhv"]
 [ext_resource type="Resource" uid="uid://bmdxvarr8e2tm" path="res://entities/enemy/stats/enemy_hp.tres" id="2_pmerd"]
@@ -6,9 +6,12 @@
 [ext_resource type="Resource" uid="uid://cvkuu2ywvyant" path="res://entities/enemy/stats/enemy_agility.tres" id="4_65jbk"]
 [ext_resource type="Resource" uid="uid://burjsdi5ki7qe" path="res://entities/enemy/stats/enemy_defense.tres" id="5_y1ap7"]
 [ext_resource type="Resource" uid="uid://10evlefhcn26" path="res://entities/enemy/stats/enemy_luck.tres" id="6_4nny4"]
+[ext_resource type="Script" path="res://combat/number_animation.gd" id="7_cf67h"]
+[ext_resource type="FontFile" uid="uid://br1uah0d8ildi" path="res://theme/assets/GrimoireOfDeath-Regular.ttf" id="8_kbqnq"]
 
-[node name="Enemy" type="Node3D"]
+[node name="Enemy" type="Node3D" node_paths=PackedStringArray("number_animation")]
 script = ExtResource("1_hbrhv")
+number_animation = NodePath("NumberAnimation")
 health = ExtResource("2_pmerd")
 strength = ExtResource("3_ing4f")
 agility = ExtResource("4_65jbk")
@@ -16,8 +19,12 @@ defense = ExtResource("5_y1ap7")
 luck = ExtResource("6_4nny4")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(0.953478, 0.165149, -0.252201, -0.00467807, 0.844598, 0.535381, 0.301426, -0.509294, 0.806078, -9.13533, 19.3417, 16.5341)
+transform = Transform3D(0.953478, 0.228926, -0.196144, -0.00467807, 0.6618, 0.749666, 0.301426, -0.713872, 0.632083, -8.14774, 34.7178, 13.4752)
 light_energy = 15.0
 shadow_enabled = true
 spot_range = 75.0
 spot_angle = 25.0
+
+[node name="NumberAnimation" type="Node2D" parent="."]
+script = ExtResource("7_cf67h")
+font = ExtResource("8_kbqnq")

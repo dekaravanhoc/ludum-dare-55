@@ -1,7 +1,6 @@
 class_name Demon
 extends Node3D
 
-@export var enemy: Enemy
 @export var number_animation: NumberAnimation
 @export var summon_animation: AnimationPlayer
 @export var demon_animation: AnimationPlayer
@@ -15,6 +14,17 @@ extends Node3D
 @export var luck: Stat
 @export var strength: Stat
 @export var agility: Stat
+@export var number_of_battles: Stat
+
+@export var demon_name: String
+@export var growth_camera: Camera3D
+@export var combat_camera: Camera3D
+@export var demon_realm_camera: Camera3D
+@export var health_mod: StatMod
+@export var strength_mod: StatMod
+@export var agility_mod: StatMod
+@export var defense_mod: StatMod
+@export var luck_mod: StatMod
 
 signal demon_defeated
 signal demon_won
@@ -27,31 +37,55 @@ const base_crit_multiplier: float = 2.0
 
 var cooldown: float = 0
 var currentState: DemonState = DemonState.DEMONREALM
+var enemy: Enemy
 
 enum DemonState { FIGHT, LOSS, WIN, DEMONREALM }
 
 
-func build_demon(request: SummonRequest) -> void:
-	blood_current.value += request.blood_gain
+func add_mods() -> void:
+	health.add_mod(health_mod)
+	health.value = health.max_value
+	strength.add_mod(strength_mod)
+	agility.add_mod(agility_mod)
+	defense.add_mod(defense_mod)
+	luck.add_mod(luck_mod)
+
+func remove_mods() -> void:
+	health.remove_mod(health_mod)
+	strength.remove_mod(strength_mod)
+	agility.remove_mod(agility_mod)
+	defense.remove_mod(defense_mod)
+	luck.remove_mod(luck_mod)
+
+func build_demon(request: SummonRequest, enemy_to_attack: Enemy) -> void:
+	enemy = enemy_to_attack
 	cooldown = _get_cooldown()
 	health.value = health.max_value
+	demon_realm_camera.make_current()
 	if enemy:
 		enemy.enemy_defeated.connect(
 			func() -> void: 
 				currentState = DemonState.WIN
-				experience_current.value += request.exp_gain
-				health.value = health.max_value
 				await summon(true)
+				experience_current.value += request.exp_gain
+				number_of_battles.value += 1
+				blood_current.value += request.blood_gain
+				health.value = health.max_value
 				demon_won.emit()
 				)
 
 
+func show_growth() -> void:
+	growth_camera.make_current()
+
+
 func start_combat() -> void:
 	currentState = DemonState.FIGHT
+	combat_camera.make_current()
 	summon()
 
 
-func rebirth() -> void:
+func reset_for_rebirth() -> void:
 	reputation.value = reputation.max_value
 	experience_current.value = 0
 	health.remove_all_mods()

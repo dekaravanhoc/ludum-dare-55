@@ -91,7 +91,20 @@ border_width_right = 12
 border_width_bottom = 12
 border_color = Color(0.8, 0.8, 0.8, 0)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k0dee"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_as11p"]
+content_margin_left = 48.0
+content_margin_top = 48.0
+content_margin_right = 48.0
+content_margin_bottom = 48.0
+bg_color = Color(0.0923971, 0.0923971, 0.0923971, 0.588235)
+border_width_left = 24
+border_width_top = 24
+border_width_right = 24
+border_width_bottom = 24
+border_color = Color(0.0941176, 0.0941176, 0.0941176, 0.588235)
+border_blend = true
+corner_radius_top_left = 48
+corner_radius_bottom_right = 48
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kqtt0"]
 
@@ -275,7 +288,7 @@ PanelContainer/styles/panel = SubResource("StyleBoxFlat_2qvtu")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_kykw2")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_hwvg5")
 RequestButton/base_type = &"Button"
-RequestButton/styles/disabled = SubResource("StyleBoxEmpty_k0dee")
+RequestButton/styles/disabled = SubResource("StyleBoxFlat_as11p")
 RequestButton/styles/focus = SubResource("StyleBoxEmpty_kqtt0")
 RequestButton/styles/hover = SubResource("StyleBoxFlat_i004q")
 RequestButton/styles/normal = SubResource("StyleBoxEmpty_l3pmw")
