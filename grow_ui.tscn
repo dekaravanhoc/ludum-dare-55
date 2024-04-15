@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnyy52ccutg2c"]
+
+[ext_resource type="Script" path="res://grow_ui.gd" id="1_j3cv2"]
+[ext_resource type="PackedScene" uid="uid://8hhjp4xg8l1e" path="res://entities/demon/grow_option.tscn" id="1_w2w1a"]
+[ext_resource type="PackedScene" uid="uid://bvkpw7aalfs5n" path="res://entities/demon/demon_types/lesser_demon.tscn" id="2_k0ij6"]
+[ext_resource type="PackedScene" uid="uid://ncic5cw5asy3" path="res://entities/demon/demon_types/higher_demon.tscn" id="4_y7olg"]
+
+[node name="Grow" type="PanelContainer" node_paths=PackedStringArray("growth_button", "growth_container", "blood_amount")]
+size_flags_horizontal = 6
+script = ExtResource("1_j3cv2")
+growth_button = NodePath("MarginContainer/VBoxContainer/Button")
+growth_container = NodePath("MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer")
+blood_amount = NodePath("MarginContainer/VBoxContainer/BloodCount")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="BloodCount" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Blood: 128"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 64
+
+[node name="GrowOption2" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_w2w1a")]
+layout_mode = 2
+demon_scene = ExtResource("2_k0ij6")
+blood_cost = 15
+
+[node name="GrowOption" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_w2w1a")]
+layout_mode = 2
+demon_scene = ExtResource("4_y7olg")
+blood_cost = 500
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Grow"

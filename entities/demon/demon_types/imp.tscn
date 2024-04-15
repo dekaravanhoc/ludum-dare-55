@@ -1,0 +1,67 @@
+[gd_scene load_steps=13 format=3 uid="uid://bao7svdtr1nin"]
+
+[ext_resource type="PackedScene" uid="uid://deomwref7oitj" path="res://entities/demon/demon.tscn" id="1_i4drx"]
+[ext_resource type="Script" path="res://entities/stats/stat_mod.gd" id="2_i86b7"]
+[ext_resource type="Animation" uid="uid://bmfoitbo4rrx3" path="res://entities/demon/demon_types/imp_animations/RESET.res" id="2_q2kvc"]
+[ext_resource type="Animation" uid="uid://bu2yv2h6gsp85" path="res://entities/demon/demon_types/imp_animations/defeat_end.res" id="3_cbiqc"]
+[ext_resource type="Animation" uid="uid://38uxf6apbnux" path="res://entities/demon/demon_types/imp_animations/defeat_start.res" id="4_qumdt"]
+[ext_resource type="Animation" uid="uid://fwca4781kfjf" path="res://entities/demon/demon_types/imp_animations/summon.res" id="5_fbhhn"]
+
+[sub_resource type="Resource" id="Resource_u825r"]
+script = ExtResource("2_i86b7")
+type = 3
+value = 0.0
+mod_name = "Stat Modifier Y"
+
+[sub_resource type="Resource" id="Resource_2y4um"]
+script = ExtResource("2_i86b7")
+type = 3
+value = 0.0
+mod_name = "Stat Modifier Y"
+
+[sub_resource type="Resource" id="Resource_f44kd"]
+script = ExtResource("2_i86b7")
+type = 3
+value = 0.0
+mod_name = "Stat Modifier Y"
+
+[sub_resource type="Resource" id="Resource_cbpd5"]
+script = ExtResource("2_i86b7")
+type = 3
+value = 0.0
+mod_name = "Stat Modifier Y"
+
+[sub_resource type="Resource" id="Resource_vv3hb"]
+script = ExtResource("2_i86b7")
+type = 3
+value = 0.0
+mod_name = "Stat Modifier Y"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ag2b0"]
+_data = {
+"RESET": ExtResource("2_q2kvc"),
+"defeat_end": ExtResource("3_cbiqc"),
+"defeat_start": ExtResource("4_qumdt"),
+"summon": ExtResource("5_fbhhn")
+}
+
+[node name="Imp" node_paths=PackedStringArray("demon_animation") instance=ExtResource("1_i4drx")]
+demon_animation = NodePath("AnimationPlayer")
+health_mod = SubResource("Resource_u825r")
+strength_mod = SubResource("Resource_2y4um")
+agility_mod = SubResource("Resource_f44kd")
+defense_mod = SubResource("Resource_cbpd5")
+luck_mod = SubResource("Resource_vv3hb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_ag2b0")
+}
+
+[node name="GrowCamera" parent="." index="5"]
+transform = Transform3D(-0.920662, -0.144892, 0.362475, -3.93142e-08, 0.928564, 0.371173, -0.390361, 0.341725, -0.854893, 1.03731, 1.90799, -2.89107)
+
+[node name="Sprite3D" parent="Summon" index="2"]
+transform = Transform3D(1, 0, 0, 0, -3.61999e-06, 1, 0, -1, -3.61999e-06, 0, 0, 0)
+
+[editable path="Summon"]

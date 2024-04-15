@@ -88,7 +88,6 @@ enum State { PREPARE, FIGHT, WIN, LOSS }
 
 const army_grid_size: Vector2 = Vector2(1.5, 1.5)
 
-@export var demon: Demon
 @export var number_animation: NumberAnimation
 
 @export var health: RangeStat
@@ -107,9 +106,10 @@ const base_crit_multiplier: float = 2.0
 var cooldown: float = 0
 var enemy_types: Array[EnemyType]
 var current_state: State = State.PREPARE
+var demon: Demon
 
-
-func build_enemy(request: SummonRequest) -> void:
+func build_enemy(request: SummonRequest, demon_to_use: Demon) -> void:
+	demon = demon_to_use
 	enemy_types = request.enemy_types
 	cooldown = _get_cooldown()
 	_build_base_stats(request.exp_multiplier)
@@ -139,7 +139,7 @@ func _process(_delta: float) -> void:
 
 func _attack() -> void:
 	var demon_screen_pos: Vector2 = get_viewport().get_camera_3d().unproject_position(
-		demon.position
+		demon.global_position
 	)
 	var is_crit: bool = _is_crit()
 	var damage: int = _get_damage(is_crit)

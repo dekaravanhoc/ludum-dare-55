@@ -85,37 +85,32 @@ func remove_mod(mod: StatMod) -> bool:
 	_recalculate(mod.type)
 	_calculate_stat()
 	mod.stat_mod_modified.disconnect(_stat_mod_modified)
+	mod.stat_mod_removed.disconnect(remove_mod)
 	return true
 
 
 func remove_all_mods() -> void:
-	mods = {
-		MOD_TYPE.BaseAdd : {
-			list = [], 
-			sum = 0.0
-		},
-		MOD_TYPE.BaseMult : {
-			list = [], 
-			sum = 1.0
-		},
-		MOD_TYPE.Add : {
-			list = [], 
-			sum = 0.0
-		},
-		MOD_TYPE.Mult : {
-			list = [], 
-			sum = 1.0
-		}
-	}
-	_recalculate(MOD_TYPE.BaseAdd)
-	_recalculate(MOD_TYPE.BaseMult)
-	_recalculate(MOD_TYPE.Mult)
-	_recalculate(MOD_TYPE.Add)
-	_calculate_stat()
+	for mod:StatMod in mods[MOD_TYPE.BaseAdd].list:
+		remove_mod(mod)
+	for mod:StatMod in mods[MOD_TYPE.BaseMult].list:
+		remove_mod(mod)
+	for mod:StatMod in mods[MOD_TYPE.Add].list:
+		remove_mod(mod)
+	for mod:StatMod in mods[MOD_TYPE.Mult].list:
+		remove_mod(mod)
 
 
 func modify_value_by_base_mult(value_to_modify: float) -> float:
-	return value_to_modify * mods[MOD_TYPE.BaseMult]
+	return value_to_modify * mods[MOD_TYPE.BaseMult].sum
+
+
+func modify_value_by_mult(value_to_modify: float) -> float:
+	return value_to_modify * mods[MOD_TYPE.Mult].sum
+
+
+func modify_value_by_all_mult(value_to_modify: float) -> float:
+	return modify_value_by_mult(modify_value_by_base_mult(value_to_modify))
+
 
 
 func _stat_mod_modified(mod: StatMod) -> void:

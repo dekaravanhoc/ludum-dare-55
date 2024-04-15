@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b1mcmqoo35nxq" path="res://demon_realm/ui/request_ui.tscn" id="2_n4o4e"]
 [ext_resource type="PackedScene" uid="uid://dbmmq04x388mw" path="res://demon_realm/ui/level_up_ui.tscn" id="3_djx08"]
 
-[node name="DemonRealmUI" type="Control" node_paths=PackedStringArray("request_ui", "rebirth_button")]
+[node name="DemonRealmUI" type="Control" node_paths=PackedStringArray("request_ui", "rebirth_button", "blood_amount")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,6 +16,7 @@ theme = ExtResource("1_aa68t")
 script = ExtResource("2_0f1kd")
 request_ui = NodePath("MarginContainer/VBoxContainer/HBoxContainer/RequestUI")
 rebirth_button = NodePath("MarginContainer/VBoxContainer/BloodAndExp/MarginContainer/HBoxContainer2/RebirthButton")
+blood_amount = NodePath("MarginContainer/VBoxContainer/BloodAndExp/MarginContainer/HBoxContainer2/HBoxContainer/Blood/Number")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

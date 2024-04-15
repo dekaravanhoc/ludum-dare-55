@@ -1,0 +1,76 @@
+[gd_scene load_steps=4 format=3 uid="uid://8hhjp4xg8l1e"]
+
+[ext_resource type="Theme" uid="uid://8k8dbw68feyc" path="res://theme/main_theme.tres" id="1_1sc6q"]
+[ext_resource type="Script" path="res://entities/demon/grow_option.gd" id="2_l4enu"]
+[ext_resource type="PackedScene" uid="uid://deomwref7oitj" path="res://entities/demon/demon.tscn" id="3_xatqe"]
+
+[node name="GrowOption" type="MarginContainer" node_paths=PackedStringArray("name_label", "blood_cost_label", "button", "demon_show_viewport")]
+theme = ExtResource("1_1sc6q")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("2_l4enu")
+demon_scene = ExtResource("3_xatqe")
+name_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Name")
+blood_cost_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/Cost")
+button = NodePath("Select")
+demon_show_viewport = NodePath("Control/SubViewportContainer/SubViewport")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(768, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Demon Name"
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="Cost" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Blood Cost: 128"
+horizontal_alignment = 2
+
+[node name="Select" type="Button" parent="."]
+layout_mode = 2
+theme_type_variation = &"RequestButton"
+toggle_mode = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_filter = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -384.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 384.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="Control/SubViewportContainer"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4

@@ -1,10 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://xm3d2betvwul"]
+[gd_scene load_steps=7 format=3 uid="uid://xm3d2betvwul"]
 
 [ext_resource type="Script" path="res://combat/combat.gd" id="1_56ajt"]
-[ext_resource type="PackedScene" uid="uid://deomwref7oitj" path="res://entities/demon/demon.tscn" id="1_mif6o"]
 [ext_resource type="PackedScene" uid="uid://c30ghnii7suyf" path="res://entities/enemy/enemy.tscn" id="2_2ddhi"]
-[ext_resource type="Script" path="res://combat/number_animation.gd" id="3_rtr1x"]
-[ext_resource type="FontFile" uid="uid://br1uah0d8ildi" path="res://theme/assets/GrimoireOfDeath-Regular.ttf" id="4_j4l4h"]
 [ext_resource type="PackedScene" uid="uid://c3vi8ywiuxrhe" path="res://combat/ui/combat_ui.tscn" id="5_nja5s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6t7if"]
@@ -27,30 +24,22 @@ fog_light_color = Color(0.280402, 0.111929, 0.127562, 1)
 fog_light_energy = 0.5
 fog_density = 0.1
 
-[node name="Combat" type="Node3D" node_paths=PackedStringArray("enemy", "demon")]
+[node name="Combat" type="Node3D" node_paths=PackedStringArray("enemy", "demon_position")]
 script = ExtResource("1_56ajt")
 enemy = NodePath("Enemy")
-demon = NodePath("Demon")
+demon_position = NodePath("DemonPosition")
 
-[node name="Demon" parent="." node_paths=PackedStringArray("enemy", "number_animation") instance=ExtResource("1_mif6o")]
+[node name="DemonPosition" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
-enemy = NodePath("../Enemy")
-number_animation = NodePath("../NumberAnimation")
 
-[node name="Enemy" parent="." node_paths=PackedStringArray("demon", "number_animation") instance=ExtResource("2_2ddhi")]
+[node name="Enemy" parent="." instance=ExtResource("2_2ddhi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
-demon = NodePath("../Demon")
-number_animation = NodePath("../NumberAnimation")
 
 [node name="Summoner" type="Node3D" parent="."]
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 layers = 3
 mesh = SubResource("PlaneMesh_c0ncx")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.815471, -0.339952, 0.468444, 0.114987, 0.88836, 0.444517, -0.567262, -0.308625, 0.763521, 6.35125, 7.23296, 10.4105)
-fov = 50.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
@@ -62,9 +51,5 @@ omni_attenuation = 1e-05
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_n3p5s")
-
-[node name="NumberAnimation" type="Node2D" parent="."]
-script = ExtResource("3_rtr1x")
-font = ExtResource("4_j4l4h")
 
 [node name="CombatUI" parent="." instance=ExtResource("5_nja5s")]
