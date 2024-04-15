@@ -9,7 +9,7 @@ extends Node3D
 @export var blood_current: Stat
 @export var blood_earned: Stat
 @export var experience_current: Stat
-@export var reputation: Stat
+@export var reputation: RangeStat
 @export var health: RangeStat
 @export var defense: Stat
 @export var luck: Stat
@@ -30,10 +30,6 @@ var currentState: DemonState = DemonState.DEMONREALM
 
 enum DemonState { FIGHT, LOSS, WIN, DEMONREALM }
 
-func _ready() -> void:
-	if summon_animation:
-		summon_animation.play("summon_demon")
-		demon_animation.play("summon")
 
 func build_demon(request: SummonRequest) -> void:
 	blood_current.value += request.blood_gain
@@ -44,11 +40,26 @@ func build_demon(request: SummonRequest) -> void:
 			func() -> void: 
 				currentState = DemonState.WIN
 				experience_current.value += request.exp_gain
+				health.value = health.max_value
+				await summon(true)
 				demon_won.emit()
 				)
-	
+
+
 func start_combat() -> void:
 	currentState = DemonState.FIGHT
+	summon()
+
+
+func rebirth() -> void:
+	reputation.value = reputation.max_value
+	experience_current.value = 0
+	health.remove_all_mods()
+	strength.remove_all_mods()
+	agility.remove_all_mods()
+	defense.remove_all_mods()
+	luck.remove_all_mods()
+
 
 func _process(_delta: float) -> void:
 	match currentState:
@@ -66,10 +77,35 @@ func hit(_damage: int) -> int:
 	var dealed_damage: int = _get_hit_damage(_damage)
 	health.value -= dealed_damage
 	if health.value <= 0:
-		currentState = DemonState.LOSS
-		demon_defeated.emit()
+		_defeat()
 	return dealed_damage
 
+
+func summon(reverse: bool = false) -> void:
+	if summon_animation:
+		if reverse:
+			summon_animation.play_backwards("summon_demon")
+			demon_animation.play_backwards("summon")
+		else:
+			summon_animation.play("summon_demon")
+			demon_animation.play("summon")
+		await demon_animation.animation_finished
+		await get_tree().create_timer(0.2).timeout
+		return
+
+
+func _defeat() -> void:
+	currentState = DemonState.LOSS
+	if summon_animation:
+		demon_animation.play("defeat_start")
+		await demon_animation.animation_finished
+		summon_animation.play_backwards("summon_demon")
+		demon_animation.play("defeat_end")
+		await demon_animation.animation_finished
+		await get_tree().create_timer(0.2).timeout
+		reputation.value -= 1
+		health.value = health.max_value
+		demon_defeated.emit()
 
 func _fight(_delta: float) -> void:
 	cooldown -= _delta

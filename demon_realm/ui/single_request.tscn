@@ -55,6 +55,7 @@ toggle_mode = true
 [node name="Control" type="Control" parent="."]
 layout_mode = 2
 size_flags_horizontal = 8
+mouse_filter = 2
 
 [node name="SummonRequestIcon" type="TextureRect" parent="Control"]
 layout_mode = 1
@@ -67,4 +68,5 @@ offset_bottom = 192.0
 grow_horizontal = 0
 size_flags_horizontal = 10
 size_flags_vertical = 0
+mouse_filter = 2
 texture = ExtResource("2_k3ilv")

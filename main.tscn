@@ -1,14 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://cct6pthb2ry00"]
+[gd_scene load_steps=5 format=3 uid="uid://cct6pthb2ry00"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_jatg1"]
 [ext_resource type="Theme" uid="uid://8k8dbw68feyc" path="res://theme/main_theme.tres" id="2_5l2mi"]
 
-[node name="Main" type="Node3D" node_paths=PackedStringArray("start_button", "grow_button", "credits_button", "exit_button", "menu", "credits", "grow")]
+[sub_resource type="Gradient" id="Gradient_ul7uw"]
+colors = PackedColorArray(0.317647, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_h6drf"]
+gradient = SubResource("Gradient_ul7uw")
+fill = 1
+fill_from = Vector2(0.495413, 0.53211)
+
+[node name="Main" type="Node3D" node_paths=PackedStringArray("start_button", "grow_button", "credits_button", "exit_button", "scene_switch", "menu", "credits", "grow")]
 script = ExtResource("1_jatg1")
 start_button = NodePath("MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Menu/VBoxContainer/Start")
 grow_button = NodePath("MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Menu/VBoxContainer/Grow")
 credits_button = NodePath("MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Menu/VBoxContainer/Credits")
 exit_button = NodePath("MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Menu/VBoxContainer/Exit")
+scene_switch = NodePath("CanvasLayer/SceneSwitch")
 menu = NodePath("MainMenu")
 credits = NodePath("MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Credits")
 grow = NodePath("MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Grow")
@@ -99,3 +108,16 @@ text = "Credits
 layout_mode = 2
 text = "Exit
 "
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="SceneSwitch" type="TextureRect" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_h6drf")
