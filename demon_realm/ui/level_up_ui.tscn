@@ -69,7 +69,7 @@ theme_override_constants/separation = 32
 [node name="HealthUpdate" parent="PanelContainer/Stats/VBoxContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("save_button") instance=ExtResource("2_1yamj")]
 layout_mode = 2
 stat_for_update = ExtResource("4_yuxa8")
-costs_to_use = 500
+costs_to_use = 400
 update_amount_to_use = 100
 save_button = NodePath("../../../SaveStatsButton")
 
@@ -83,21 +83,21 @@ save_button = NodePath("../../../SaveStatsButton")
 [node name="AgilityUpdate" parent="PanelContainer/Stats/VBoxContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("save_button") instance=ExtResource("2_1yamj")]
 layout_mode = 2
 stat_for_update = ExtResource("6_658q6")
-costs_to_use = 400
+costs_to_use = 200
 update_amount_to_use = 1
 save_button = NodePath("../../../SaveStatsButton")
 
 [node name="DefenseUpdate" parent="PanelContainer/Stats/VBoxContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("save_button") instance=ExtResource("2_1yamj")]
 layout_mode = 2
 stat_for_update = ExtResource("7_o5iug")
-costs_to_use = 600
+costs_to_use = 200
 update_amount_to_use = 1
 save_button = NodePath("../../../SaveStatsButton")
 
 [node name="LuckUpdate" parent="PanelContainer/Stats/VBoxContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("save_button") instance=ExtResource("2_1yamj")]
 layout_mode = 2
 stat_for_update = ExtResource("8_e3wb3")
-costs_to_use = 10000
+costs_to_use = 600
 update_amount_to_use = 1
 save_button = NodePath("../../../SaveStatsButton")
 

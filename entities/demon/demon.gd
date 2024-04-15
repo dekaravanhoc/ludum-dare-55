@@ -126,18 +126,16 @@ func _attack() -> void:
 	number_animation.add_damage(enemy_screen_pos, dealed_damage, Color.DARK_RED, damage_text)
 
 func _get_hit_damage(damage: int) -> int:
-	return roundi((damage - roundi(pow(defense.value / _get_cooldown(), 1.5))) / (base_crit_multiplier if _is_reduction_crit() else 1.0)) 
-
+	return clamp(roundi((damage - roundi(pow(defense.value / _get_cooldown(), 1.5))) / (base_crit_multiplier if _is_reduction_crit() else 1.0)),0,INF) 
 
 func _get_cooldown() -> float:
-	var max_agility: int = 200
+	var max_agility: int = 100
 	var agility_progress: float = clamp(agility.value/max_agility,0,1)
 	return best_cooldown + base_cooldown - base_cooldown * ease(agility_progress,.5)
 
 func _get_damage(is_crit: bool) -> int:
 	print(pow(strength.value, 2))
 	return roundi(base_damage + pow(strength.value, 2) * randf_range(0.9, 1.1) * (base_crit_multiplier if is_crit else 1.0))
-
 
 func _is_crit() -> bool:
 	return randf_range(0.0, 1.0) <= (luck.value * 0.01 + base_crit_perc)
