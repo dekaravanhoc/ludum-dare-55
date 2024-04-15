@@ -8,11 +8,11 @@ var exp_multiplier: float
 var difficulty: int
 var exp_gain: int = 100
 
-func _init() -> void:
+func _init(first: bool = false) -> void:
 	var reputation: RangeStat = load("res://entities/demon/stats/demon_reputation.tres")
 	var number_of_battle: Stat = load("res://entities/demon/stats/demon_number_of_battle.tres")
 	var reputation_diff: int = int(reputation.max_value - reputation.value)
-	difficulty = randi_range(-reputation_diff - 3, -reputation_diff + 3)
+	difficulty = randi_range(-reputation_diff - 3, -reputation_diff + 3) if not first else 0
 	exp_gain = roundi(pow(exp_gain * maxi(1, int(number_of_battle.value) + difficulty), 1.07))
 	blood_gain = roundi(pow(blood_gain * maxi(1, int(number_of_battle.value) + difficulty), 2.5))
 	exp_multiplier = pow(maxi(1, int(number_of_battle.value) + difficulty), 2.0)

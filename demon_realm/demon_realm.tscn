@@ -14,8 +14,9 @@ fog_enabled = true
 fog_light_color = Color(0.0784314, 0.0784314, 0.0784314, 1)
 fog_density = 0.3
 
-[node name="DemonRealm" type="Node3D" node_paths=PackedStringArray("ui")]
+[node name="DemonRealm" type="Node3D" node_paths=PackedStringArray("demon", "ui")]
 script = ExtResource("1_a5ejn")
+demon = NodePath("Demon")
 ui = NodePath("DemonRealmUI")
 
 [node name="Demon" parent="." instance=ExtResource("1_n0dwk")]
