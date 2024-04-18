@@ -139,6 +139,7 @@ func _defeat() -> void:
 		await demon_animation.animation_finished
 		await get_tree().create_timer(0.2).timeout
 		reputation.value -= 1
+		number_of_battles.value -= 1
 		health.value = health.max_value
 		demon_defeated.emit()
 

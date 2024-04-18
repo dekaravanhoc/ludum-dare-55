@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=26 format=3 uid="uid://8k8dbw68feyc"]
+[gd_resource type="Theme" load_steps=27 format=3 uid="uid://8k8dbw68feyc"]
 
 [ext_resource type="FontFile" uid="uid://br1uah0d8ildi" path="res://theme/assets/GrimoireOfDeath-Regular.ttf" id="1_s8hjq"]
 
@@ -271,6 +271,17 @@ border_color = Color(0, 0, 0, 1)
 border_blend = true
 corner_radius_top_left = 48
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_asokc"]
+bg_color = Color(0.192157, 0, 0, 0.882353)
+border_width_left = 48
+border_width_top = 48
+border_width_right = 48
+border_width_bottom = 48
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 48
+corner_radius_bottom_right = 48
+
 [resource]
 default_font = ExtResource("1_s8hjq")
 default_font_size = 64
@@ -305,4 +316,5 @@ TabContainer/styles/tab_focus = SubResource("StyleBoxEmpty_ucvvf")
 TabContainer/styles/tab_hovered = SubResource("StyleBoxFlat_i1tty")
 TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_nnb43")
 TabContainer/styles/tab_unselected = SubResource("StyleBoxFlat_tiy8n")
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_asokc")
 VBoxContainer/constants/separation = 64

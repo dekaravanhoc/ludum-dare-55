@@ -16,9 +16,10 @@ extends Node3D
 @export var grow: GrowthUI
 
 var number_of_battles: Stat = preload("res://entities/demon/stats/demon_number_of_battle.tres")
-
+var current_blood: Stat = preload("res://entities/demon/stats/demon_blood_current.tres")
 var combat_scene: PackedScene = preload("res://combat/combat.tscn")
 var demon_realm_scene: PackedScene = preload("res://demon_realm/demon_realm.tscn")
+
 
 var current_combat: Combat
 var current_demon_realm: DemonRealm
@@ -31,6 +32,8 @@ func _ready() -> void:
 	credits_button.pressed.connect(_show_credits)
 	exit_button.pressed.connect(_exit)
 	grow.growth_selected.connect(_grow)
+
+	current_blood.value = 0
 
 	_fade_music(bg_music, combat_music)
 

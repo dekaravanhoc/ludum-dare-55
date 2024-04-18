@@ -30,6 +30,10 @@ func _ready() -> void:
 	enemy_health.value_changed.connect(update_enemy_health_bar)
 	update_enemy_health_bar.call()
 
+	if not OS.is_debug_build():
+		fps_label.hide()
+		set_process(false)
+
 func _process(delta: float) -> void:
 	fps_label.text = str(round(1 / delta))
 

@@ -6,4 +6,4 @@
 script = ExtResource("1_1t3se")
 min_value = 0.0
 stat_name = "Reputation"
-base_value = 6.0
+base_value = 8.0

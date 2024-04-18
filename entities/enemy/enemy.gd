@@ -158,7 +158,7 @@ func _exit_tree() -> void:
 
 func _place_meshes(muliplyer: int) -> void:
 	enemy_types.sort_custom(func(a: EnemyType, b: EnemyType) -> bool: return a.position == EnemyType.Position.FRONT and b.position == EnemyType.Position.BACK) 
-	var number_of_enemies: int = maxi(1,roundi(lerpf(1.0, 10000, ease(minf(1,muliplyer/10000.0), 2))))
+	var number_of_enemies: int = maxi(1,roundi(lerpf(1.0, 5000, ease(minf(1,muliplyer/5000.0), 2))))
 	var number_of_enemies_per_type: int = maxi(1, floori(number_of_enemies / float(enemy_types.size())))
 	print("Number of Enemies: %d, Number of Enemies per Type: %d, Size: %d" % [number_of_enemies, number_of_enemies_per_type, enemy_types.size()])
 	var number_of_enemies_x: int = ceil(sqrt(number_of_enemies))
@@ -233,7 +233,7 @@ func _base_stat_modify(stat: Stat, multiplyer: float) -> void:
 
 func _get_hit_damage(damage: int) -> int:
 	var hit_damage: int = roundi((damage - roundi(pow(defense.value / _get_cooldown(), 1.01))) / (base_crit_multiplier if _is_reduction_crit() else 1.0)) 
-	return maxi(hit_damage, 0)
+	return maxi(hit_damage, 1)
 
 func _get_cooldown() -> float:
 	return base_cooldown - pow(agility.value, 0.2) + 1

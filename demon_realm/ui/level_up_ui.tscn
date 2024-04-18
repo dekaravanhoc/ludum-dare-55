@@ -42,17 +42,29 @@ theme_override_constants/separation = 128
 
 [node name="Knowledge" type="HBoxContainer" parent="PanelContainer/Stats/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="PanelContainer/Stats/VBoxContainer/Knowledge"]
+layout_mode = 2
+tooltip_text = "Here you can use your Knowledge to upgrade Stats.
+
+Heath: Just plain Health.
+Strength: Influences you Base Damage.
+Agility: Influences you Attack Speed and Armor.
+Defence: Influences your Base Armor.
+Luck: Raises the chance for double Damage done
+and for half Damage received."
+mouse_filter = 1
+text = " ? "
 
 [node name="Name" type="Label" parent="PanelContainer/Stats/VBoxContainer/Knowledge"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 10
 text = "Knowledge: "
 
 [node name="Number" type="Label" parent="PanelContainer/Stats/VBoxContainer/Knowledge"]
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 2
 text = "100000"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/Stats/VBoxContainer"]
